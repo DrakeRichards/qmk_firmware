@@ -2,11 +2,11 @@
 #include QMK_KEYBOARD_H
 
 //Defines
-#define _QWER 0
+#define _QWER 5
 #define _CTRL 2
 #define _SYST 4
 #define _NUMP 3
-#define _COLE 5
+#define _COLE 0
 #define _GAME 1
 
 //Variable Declaration
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB, KC_Q,   KC_W,   KC_F,   KC_P,   KC_G,                           KC_J,   KC_L,   KC_U,   KC_Y,   KC_SCLN,KC_MINS,
         KC_ESC, KC_A,   KC_R,   KC_S,   KC_T,   KC_D,                           KC_H,   KC_N,   KC_E,   KC_I,   KC_O,   KC_QUOT,
         KC_ENTER,KC_Z,  KC_X,   KC_C,   KC_V,   KC_B,                           KC_K,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,KC_BSLS,
-                        KC_LGUI,ALT_TAB,                                                        KC_EQL, TG(_QWER),
+                        KC_LGUI,ALT_TAB,                                                        KC_EQL, TG(_GAME),
                                         LT(_CTRL,KC_BSPC), LSFT_T(KC_SPC),    RSFT_T(KC_SPC), LT(_CTRL,KC_DEL),
                                         KC_LALT,KC_LCTL,                        KC_ENT, KC_HOME,
                                         LSFT(KC_TAB), LT(_NUMP,KC_TAB),       LT(_NUMP,KC_TAB), KC_END),
@@ -136,7 +136,7 @@ void matrix_scan_user(void) {     // The very important timer.
 //Backlight color control
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
-    case _QWER:
+    case _COLE:
         rgblight_sethsv_noeeprom (HSV_TEAL);
         break;
     case _CTRL:
@@ -153,7 +153,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             unregister_code(KC_NLCK);
         }
         break;
-    case _COLE:
+    case _QWER:
         rgblight_sethsv_noeeprom (HSV_BLUE);
         break;
     case _GAME:
