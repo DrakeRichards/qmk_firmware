@@ -95,8 +95,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ENTER,KC_Z,  KC_X,   KC_C,   KC_V,   KC_B,                           KC_K,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,KC_BSLS,
                         KC_LGUI,ALT_TAB,                                                        KC_EQL, TG(_GAME),
                                         LT(_CTRL,KC_BSPC), LSFT_T(KC_SPC),    RSFT_T(KC_SPC), LT(_CTRL,KC_DEL),
-                                        KC_LALT,KC_LCTL,                        KC_ENT, KC_HOME,
-                                        LSFT(KC_TAB), LT(_NUMP,KC_TAB),       LT(_NUMP,KC_TAB), KC_END),
+                                        KC_LALT,LCTL_T(KC_TAB),                        KC_ENT, KC_HOME,
+                                        LSFT(KC_TAB), LT(_NUMP,KC_TAB),       TG(_SYST), KC_END),
 
 };
 

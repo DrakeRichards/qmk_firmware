@@ -43,6 +43,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define IGNORE_MOD_TAP_INTERRUPT
 #define TAPPING_TERM 200
 
+#ifdef DEBOUNCE
+#undef DEBOUNCE
+#endif
+#define DEBOUNCE 10
+
 #define ENCODERS_PAD_A { F4 }
 #define ENCODERS_PAD_B { F5 }
 
