@@ -23,4 +23,7 @@
     #undef TAPPING_TERM
 #endif
 
-#define TAPPING_TERM 200
+#define TAPPING_TERM 150
+#ifndef PERMISSIVE_HOLD
+    #define PERMISSIVE_HOLD
+#endif
