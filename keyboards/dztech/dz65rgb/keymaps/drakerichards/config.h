@@ -23,7 +23,10 @@
     #undef TAPPING_TERM
 #endif
 
-#define TAPPING_TERM 150
+#define TAPPING_TERM 200
 #ifndef PERMISSIVE_HOLD
     #define PERMISSIVE_HOLD
+#endif
+#ifndef IGNORE_MOD_TAP_INTERRUST
+    #define IGNORE_MOD_TAP_INTERRUPT
 #endif

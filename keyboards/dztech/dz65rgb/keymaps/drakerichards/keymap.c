@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,         KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_LBRC, KC_RBRC, KC_BSLS, KC_PGUP,
         MO(1),          KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,          KC_ENT,  KC_PGDN,
         KC_LSPO,                 KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC, KC_UP,   KC_END,
-        KC_LCTL,        KC_LGUI, KC_LALT,     KC_SPC,      LGUI(LCTL(KC_LEFT)), LALT(KC_F13), LGUI(LCTL(KC_RIGHT)), KC_LEFT, KC_DOWN, KC_RIGHT
+        KC_LCTL,        KC_LGUI, KC_LALT,     LSFT_T(KC_SPC),      LGUI(LCTL(KC_LEFT)), LALT(KC_F13), LGUI(LCTL(KC_RIGHT)), KC_LEFT, KC_DOWN, KC_RIGHT
     ),
     [1] = LAYOUT_65_ansi(
         KC_GESC,        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  KC_HOME,
