@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_1,       KC_2,       KC_3,       KC_4,
         KC_F5,      KC_F6,      KC_F7,      KC_F8,
         KC_F1,      KC_F2,      KC_F3,      KC_F4,
-        KC_LSFT,    TO(NUMP),   KC_ESC,     KC_SPC
+        KC_ESC,     TO(NUMP),   KC_SPC,     KC_LSFT
   )
 };
 
@@ -69,19 +69,49 @@ void led_set_user(uint8_t usb_led) {
 }
 
 const rgblight_segment_t PROGMEM my_numlayers_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {1, 3, HSV_WHITE},
-    {4, 1, HSV_RED},
-    {5, 3, HSV_WHITE},
-    {8, 1, HSV_RED},
-    {9, 3, HSV_WHITE},
-    {12, 1, HSV_RED},
-    {13, 2, HSV_WHITE},
-    {15, 1, HSV_YELLOW},
-    {16, 1, HSV_RED}
+    {0, 1, HSV_BLUE},
+    {1, 6, HSV_GREEN},
+    {7, 2, HSV_BLUE},
+    {9, 3, HSV_GREEN},
+    {12, 2, HSV_GREEN},
+    {14, 1, HSV_RED},
+    {15, 1, HSV_BLUE}
+);
+
+const rgblight_segment_t PROGMEM my_fnum_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 1, HSV_PURPLE},
+    {1, 6, HSV_TEAL},
+    {7, 2, HSV_PURPLE},
+    {9, 3, HSV_TEAL},
+    {12, 2, HSV_TEAL},
+    {14, 1, HSV_RED},
+    {15, 1, HSV_PURPLE}
+);
+
+const rgblight_segment_t PROGMEM my_numnum_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 1, HSV_GOLD},
+    {1, 6, HSV_CYAN},
+    {7, 2, HSV_GOLD},
+    {9, 3, HSV_CYAN},
+    {12, 2, HSV_CYAN},
+    {14, 1, HSV_RED},
+    {15, 1, HSV_GOLD}
+);
+
+const rgblight_segment_t PROGMEM my_runelayer_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 4, HSV_TURQUOISE},
+    {4, 8, HSV_BLUE},
+    {12, 1, HSV_YELLOW},
+    {13, 1, HSV_GOLD},
+    {14, 1, HSV_RED},
+    {15, 1, HSV_PURPLE}
 );
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    my_numlayers_layer
+    my_numlayers_layer,
+    my_fnum_layer,
+    my_numnum_layer,
+    my_runelayer_layer
 );
 
 void keyboard_post_init_user(void) {
@@ -90,5 +120,12 @@ void keyboard_post_init_user(void) {
 
 layer_state_t default_layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(0, layer_state_cmp(state, NUMP));
+    return state;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(1, layer_state_cmp(state, NUMS));
+    rgblight_set_layer_state(2, layer_state_cmp(state, NUMF));
+    rgblight_set_layer_state(3, layer_state_cmp(state, RUNE));
     return state;
 }
