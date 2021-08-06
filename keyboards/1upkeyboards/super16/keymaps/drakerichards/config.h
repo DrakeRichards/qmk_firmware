@@ -16,8 +16,6 @@
 
 #pragma once
 
-#ifndef RGBLIGHT_LAYERS
-    #define RGBLIGHT_LAYERS
-#endif
+#define RGBLIGHT_LAYERS
 
 // place overrides here
