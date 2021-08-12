@@ -19,15 +19,43 @@ enum LAYER_NAMES {
     NUMP,
     NUMF,
     NUMS,
-    RUNE
+    RUNE,
+    TEXS
 };
+
+enum CUSTOM_KEYCODES {
+    IDLE
+};
+
+enum COMBOS {
+    PENT,
+    PBSP,
+    PESC,
+    PTAB
+};
+
+const uint16_t PROGMEM pent_combo[] = {KC_PPLS, KC_PAST, COMBO_END};
+const uint16_t PROGMEM pbsp_combo[] = {KC_PSLS, KC_KP_7, COMBO_END};
+const uint16_t PROGMEM pesc_combo[] = {KC_KP_7, KC_KP_8, COMBO_END};
+const uint16_t PROGMEM ptab_combo[] = {KC_KP_8, KC_KP_9, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+    [PENT] = COMBO(pent_combo, KC_PENT),
+    [PBSP] = COMBO(pbsp_combo, KC_BSPC),
+    [PESC] = COMBO(pesc_combo, KC_ESC),
+    [PTAB] = COMBO(ptab_combo, KC_TAB)
+};
+
+bool idle_enabled = false;
+uint16_t idle_timer = 0;
+bool idle_led_state = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [NUMP] = LAYOUT_ortho_4x4( /* Base */
         KC_PSLS,    KC_KP_7,    KC_KP_8,    KC_KP_9,
         KC_PMNS,    KC_KP_4,    KC_KP_5,    KC_KP_6,
         KC_PPLS,    KC_KP_1,    KC_KP_2,    KC_KP_3,
-        KC_PAST,    TO(NUMS),   KC_PDOT,    KC_KP_0
+        KC_PAST,       TO(NUMS),   KC_PDOT,    KC_KP_0
   ),
 
     [NUMS] = LAYOUT_ortho_4x4( /* Regular numbers */
@@ -48,12 +76,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_1,       KC_2,       KC_3,       KC_4,
         KC_F5,      KC_F6,      KC_F7,      KC_F8,
         KC_F1,      KC_F2,      KC_F3,      KC_F4,
-        KC_ESC,     TO(NUMP),   KC_SPC,     KC_LSFT
+        LCTL_T(KC_ESC),     TO(TEXS),   KC_SPC,     KC_LSFT
+  ),
+
+    [TEXS] = LAYOUT_ortho_4x4( /* Old School Runescape */
+        KC_1,       KC_2,       KC_3,       KC_4,
+        KC_F5,      KC_F6,      KC_F7,      KC_F8,
+        KC_F1,      KC_F2,      KC_F3,      KC_F4,
+        IDLE,     TO(NUMP),   KC_SPC,     KC_LSFT
   )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  return true;
+    switch (keycode) {
+        case IDLE:
+            if (record->event.pressed) {
+                if (idle_enabled == true) {
+                    idle_enabled = false;
+                    idle_timer = 0;
+                } else {
+                    idle_enabled = true;
+                    idle_timer = 0;
+                };
+                break;
+            }
+    }
+    return true;
 }
 
 void matrix_init_user(void) {
@@ -61,6 +109,27 @@ void matrix_init_user(void) {
 }
 
 void matrix_scan_user(void) {
+    if (idle_enabled == true) {
+        ++idle_timer;
+        if (idle_timer >= 3000) {
+            tap_code(KC_F15);
+            idle_timer = 0;
+            /*
+            if (idle_led_state == true) {
+                rgblight_sethsv_at(HSV_RED, 15);
+                idle_led_state = false;
+            } else {
+                rgblight_sethsv_at(HSV_YELLOW, 15);
+                idle_led_state = true;
+            };*/
+
+            rgblight_toggle_noeeprom();
+
+        } else {
+        }
+    }
+
+
 
 }
 
@@ -107,11 +176,20 @@ const rgblight_segment_t PROGMEM my_runelayer_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {15, 1, HSV_PURPLE}
 );
 
+const rgblight_segment_t PROGMEM texas_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 1, HSV_BLUE},
+    {1, 6, HSV_WHITE},
+    {7, 2, HSV_BLUE},
+    {9, 6, HSV_RED},
+    {15, 1, HSV_BLUE}
+);
+
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     my_numlayers_layer,
     my_fnum_layer,
     my_numnum_layer,
-    my_runelayer_layer
+    my_runelayer_layer,
+    texas_layer
 );
 
 void keyboard_post_init_user(void) {
@@ -127,5 +205,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(1, layer_state_cmp(state, NUMS));
     rgblight_set_layer_state(2, layer_state_cmp(state, NUMF));
     rgblight_set_layer_state(3, layer_state_cmp(state, RUNE));
+    rgblight_set_layer_state(4, layer_state_cmp(state, TEXS));
     return state;
 }
