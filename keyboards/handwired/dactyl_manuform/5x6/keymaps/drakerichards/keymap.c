@@ -9,6 +9,7 @@
 #define _COLE 0
 #define _GAME 1
 #define _CLGM 6
+#define _RUNE 7
 
 //Variable Declaration
 bool is_alt_tab_active = false;    // ADD this near the begining of keymap.c
@@ -94,17 +95,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB, KC_Q,   KC_W,   KC_F,   KC_P,   KC_G,                           KC_J,   KC_L,   KC_U,   KC_Y,   KC_SCLN,KC_MINS,
         KC_ESC, KC_A,   KC_R,   KC_S,   KC_T,   KC_D,                           KC_H,   KC_N,   KC_E,   KC_I,   KC_O,   KC_QUOT,
         KC_ENTER,KC_Z,  KC_X,   KC_C,   KC_V,   KC_B,                           KC_K,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,KC_BSLS,
-                        KC_LGUI,ALT_TAB,                                                        KC_EQL, TG(_CLGM),
+                        KC_LGUI,ALT_TAB,                                                        KC_EQL, TO(_RUNE),
                                         KC_BSPC, KC_SPC,                        KC_SPC,KC_DEL,
                                         KC_LALT,KC_LCTL,                        KC_ENT, KC_HOME,
                                         LSFT(KC_TAB),KC_TAB,                    LT(_NUMP,KC_TAB), KC_END),
+
+    [_RUNE] = LAYOUT_5x6(
+        KC_MUTE,KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                           KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_GRV,
+        KC_TAB, KC_Q,   KC_W,   KC_F,   KC_P,   KC_G,                           KC_J,   KC_L,   KC_U,   KC_Y,   KC_SCLN,KC_MINS,
+        KC_ESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                           KC_H,   KC_N,   KC_E,   KC_I,   KC_O,   KC_QUOT,
+        KC_ENTER,KC_Z,  KC_X,   KC_C,   KC_V,   KC_B,                           KC_K,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,KC_BSLS,
+                        KC_LGUI,ALT_TAB,                                                        KC_EQL, TO(_COLE),
+                                        LT(_CTRL,KC_BSPC), LSFT_T(KC_SPC),                        KC_SPC,KC_DEL,
+                                        KC_LALT,KC_LCTL,                        KC_ENT, KC_HOME,
+                                        LSFT(KC_TAB),LT(_NUMP,KC_TAB),                    LT(_NUMP,KC_TAB), KC_END),
 
     [_COLE] = LAYOUT_5x6(
         KC_MUTE,KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                           KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_GRV,
         KC_TAB, KC_Q,   KC_W,   KC_F,   KC_P,   KC_G,                           KC_J,   KC_L,   KC_U,   KC_Y,   KC_SCLN,KC_MINS,
         KC_ESC, KC_A,   KC_R,   KC_S,   KC_T,   KC_D,                           KC_H,   KC_N,   KC_E,   KC_I,   KC_O,   KC_QUOT,
         KC_ENTER,KC_Z,  KC_X,   KC_C,   KC_V,   KC_B,                           KC_K,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,KC_BSLS,
-                        KC_LGUI,ALT_TAB,                                                        KC_EQL, TG(_CLGM),
+                        KC_LGUI,ALT_TAB,                                                        KC_EQL, TO(_CLGM),
                                         LT(_CTRL,KC_BSPC), LSFT_T(KC_SPC),    RSFT_T(KC_SPC), LT(_CTRL,KC_DEL),
                                         KC_LALT,LCTL_T(KC_TAB),                        KC_ENT, KC_HOME,
                                         LSFT(KC_TAB), LT(_NUMP,KC_TAB),       TG(_SYST), KC_END),
@@ -154,7 +165,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         rgblight_sethsv_noeeprom (HSV_GREEN);
         break;
     case _SYST:
-        rgblight_sethsv_noeeprom (HSV_RED);
+        rgblight_sethsv_noeeprom (HSV_PINK);
         break;
     case _NUMP:
         rgblight_sethsv_noeeprom (HSV_GOLD);
@@ -172,6 +183,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         break;
     case _CLGM:
         rgblight_sethsv_noeeprom (HSV_RED);
+        break;
+    case _RUNE:
+        rgblight_sethsv_noeeprom (HSV_ORANGE);
         break;
     default: //  for any other layers, or the default layer
         rgblight_sethsv_noeeprom (HSV_TEAL);
