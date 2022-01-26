@@ -27,7 +27,7 @@ enum layers {
 };
 
 enum CUSTOM_KEYCODES {
-    IDLE
+    KC_IDLE = SAFE_RANGE
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -41,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_GRV              , KC_MINUS  , KC_7                  , KC_8              , KC_9      , KC_LCBR	            , KC_RCBR   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_PLUS  ,
 		KC_TRNS	            , KC_0      , KC_4	                , KC_5              , KC_6      , KC_LPRN               , KC_RPRN   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_EQL   ,
 		KC_TRNS             , KC_DOT    , KC_1                  , KC_2              , KC_3      , KC_LBRC               , KC_RBRC   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_NO   ,
-		KC_TRNS             , KC_TRNS   , KC_TRNS               , KC_TRNS           , KC_TRNS   , KC_TRNS   , IDLE   , KC_NO     , MO(_ADJUST)       ,KC_HOME    ,KC_PGUP    , KC_PGDN   , KC_END
+		KC_TRNS             , KC_TRNS   , KC_TRNS               , KC_TRNS           , KC_TRNS   , KC_TRNS   , KC_IDLE   , KC_NO     , MO(_ADJUST)       ,KC_HOME    ,KC_PGUP    , KC_PGDN   , KC_END
 	),
 	[_RAISE] = LAYOUT(
 		KC_TRNS	, KC_PGUP	  , KC_HOME    , KC_UP    , KC_END	, KC_NO              , KC_NO    , KC_7    , KC_8    , KC_9    , KC_NO    , KC_NO  ,
@@ -126,7 +126,7 @@ bool oled_task_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case IDLE:
+        case KC_IDLE:
             if (record->event.pressed) {
                 if (idle_enabled == true) {
                     idle_enabled = false;
@@ -137,7 +137,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     idle_timer = 0;
                 };
                 break;
-            }
+            } else {
+            };
+            break;
     };
     return true;
 };
