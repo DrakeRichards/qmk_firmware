@@ -117,4 +117,22 @@ static void render_danceYah(void) {
 
     oled_write_raw_P(DanceYah, sizeof(DanceYah));
 
-}
+};
+
+void idle_anim(uint8_t anim_frame) {
+    switch(anim_frame) {
+        case 0:
+            render_danceRight();
+            break;
+        case 1:
+            render_danceLeft();
+            break;
+        case 2:
+            render_danceRight();
+            break;
+        case 3:
+            render_danceYah();
+            break;
+    };
+};
+

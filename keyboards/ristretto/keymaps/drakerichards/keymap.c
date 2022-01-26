@@ -26,18 +26,22 @@ enum layers {
 	_ADJUST
 };
 
+enum CUSTOM_KEYCODES {
+    IDLE
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_BASE] = LAYOUT(
 		KC_TAB  			, KC_Q    	, KC_W    				, KC_F    			, KC_P    	, KC_G                  , KC_J      , KC_L    			, KC_U      , KC_Y      , KC_SCLN   , KC_MINUS ,
 		LT(_RAISE, KC_ESC)  , KC_A    	, KC_R    				, KC_S    			, KC_T    	, KC_D                  , KC_H      , KC_N    			, KC_E      , KC_I      , KC_O      , KC_QUOT ,
 		KC_LALT 			, KC_Z    	, KC_X    				, KC_C    			, KC_V    	, KC_B      			, KC_K      , KC_M    			, KC_COMM   , KC_DOT    , KC_SLSH   , KC_BSLASH  ,
-	    LCTL_T(KC_ENT) 		, KC_LGUI 	, OSL(_FUNC)	        , LT(_SYMB, KC_BSPC), MO(_LOWER),KC_LSFT, OSM(KC_MEH)   , KC_SPC    , LT(_RAISE, KC_DEL), KC_LEFT   ,KC_UP 	    , KC_DOWN   , KC_RIGHT
+	    LCTL_T(KC_ENT) 		, KC_LGUI 	, OSL(_FUNC)	        , LT(_SYMB, KC_BSPC), MO(_LOWER),KC_LSFT, OSM(MOD_MEH)   , KC_SPC    , LT(_RAISE, KC_DEL), KC_LEFT   ,KC_UP 	    , KC_DOWN   , KC_RIGHT
 	),
     [_LOWER] = LAYOUT(
 		KC_GRV              , KC_MINUS  , KC_7                  , KC_8              , KC_9      , KC_LCBR	            , KC_RCBR   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_PLUS  ,
 		KC_TRNS	            , KC_0      , KC_4	                , KC_5              , KC_6      , KC_LPRN               , KC_RPRN   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_EQL   ,
 		KC_TRNS             , KC_DOT    , KC_1                  , KC_2              , KC_3      , KC_LBRC               , KC_RBRC   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_NO   ,
-		KC_TRNS             , KC_TRNS   , KC_TRNS               , KC_TRNS           , KC_TRNS   , KC_TRNS   , KC_NO   , KC_NO     , MO(_ADJUST)       ,KC_HOME    ,KC_PGUP    , KC_PGDN   , KC_END
+		KC_TRNS             , KC_TRNS   , KC_TRNS               , KC_TRNS           , KC_TRNS   , KC_TRNS   , IDLE   , KC_NO     , MO(_ADJUST)       ,KC_HOME    ,KC_PGUP    , KC_PGDN   , KC_END
 	),
 	[_RAISE] = LAYOUT(
 		KC_TRNS	, KC_PGUP	  , KC_HOME    , KC_UP    , KC_END	, KC_NO              , KC_NO    , KC_7    , KC_8    , KC_9    , KC_NO    , KC_NO  ,
@@ -61,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX           , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
 		XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_CAPS           , KC_NLCK , KC_SLCK , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
 		XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX           , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
-		KC_TRNS , KC_TRNS , KC_TRNS , XXXXXXX , XXXXXXX , XXXXXXX , KC_MUTE , XXXXXXX , XXXXXXX , XXXXXXX , KC_TRNS , KC_TRNS , KC_TRNS
+		KC_TRNS , KC_TRNS , KC_TRNS , XXXXXXX , XXXXXXX , XXXXXXX , RESET , XXXXXXX , XXXXXXX , XXXXXXX , KC_TRNS , KC_TRNS , KC_TRNS
 	)
 /*  [_BLANK] = LAYOUT(
 		KC_TRNS             , KC_NO             , KC_NO                 , KC_NO             , KC_NO         , KC_NO	                            , KC_NO         , KC_NO         , KC_NO         , KC_NO         , KC_NO         , KC_NO  ,
@@ -73,19 +77,73 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // OLED and Encoder function is located in the ristretto.c File
 
-uint16_t cat_timer = 0
+bool idle_enabled = false;
+uint16_t idle_timer = 0;
+uint8_t anim_frame = 0;
+const uint16_t timer_max = 2000;
 
 bool oled_task_user(void) {
-    switch (get_highest_layer(layer_state)) {
+    if (idle_enabled == true) {
+        ++idle_timer;
+        if (idle_timer >= timer_max) {
+            idle_timer = 0;
+            tap_code(KC_F15);
+            idle_anim(anim_frame);
+            if (anim_frame < 3) {
+                ++anim_frame;
+                }
+            else {
+                anim_frame = 0;
+            };
+        } else {
+
+        };
+    };
+	/*oled_write_P(PSTR("\n\n"), false);
+	oled_write_ln_P(PSTR("LAYER"), false);
+	switch (get_highest_layer(layer_state)) {
 		case _BASE:
-			render_danceYah();
+			oled_write_P(PSTR("BASE\n"), false);
 			break;
 		case _RAISE:
-			render_danceRight();
+			oled_write_P(PSTR("RAISE\n"), false);
 			break;
 		case _LOWER:
-			render_danceLeft();
+			oled_write_P(PSTR("LOWER\n"), false);
 			break;
-	}
+		case _ADJUST:
+			oled_write_P(PSTR("ADJ\n"), false);
+			break;
+        case _FUNC:
+            oled_write_P(PSTR("FUNC\n"), false);
+            break;
+        case _SYMB:
+            oled_write_P(PSTR("SYMB\n"), false);
+            break;
+	};*/
     return false;
-}
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case IDLE:
+            if (record->event.pressed) {
+                if (idle_enabled == true) {
+                    idle_enabled = false;
+                    idle_timer = 0;
+                    oled_clear();
+                } else {
+                    idle_enabled = true;
+                    idle_timer = 0;
+                };
+                break;
+            }
+    };
+    return true;
+};
+
+void matrix_init_user(void) {
+};
+
+void matrix_scan_user(void) {
+};
