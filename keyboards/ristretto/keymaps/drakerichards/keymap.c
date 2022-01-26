@@ -78,28 +78,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // OLED and Encoder function is located in the ristretto.c File
 
 bool idle_enabled = false;
-uint16_t idle_timer = 0;
+const uint16_t timer_max = 1000;
+uint16_t idle_timer = timer_max;
 uint8_t anim_frame = 0;
-const uint16_t timer_max = 2000;
 
 bool oled_task_user(void) {
-    if (idle_enabled == true) {
-        ++idle_timer;
-        if (idle_timer >= timer_max) {
-            idle_timer = 0;
-            tap_code(KC_F15);
-            idle_anim(anim_frame);
-            if (anim_frame < 3) {
-                ++anim_frame;
-                }
-            else {
-                anim_frame = 0;
-            };
-        } else {
-
-        };
-    };
-	/*oled_write_P(PSTR("\n\n"), false);
+	oled_write_P(PSTR("\n\n"), false);
 	oled_write_ln_P(PSTR("LAYER"), false);
 	switch (get_highest_layer(layer_state)) {
 		case _BASE:
@@ -120,7 +104,22 @@ bool oled_task_user(void) {
         case _SYMB:
             oled_write_P(PSTR("SYMB\n"), false);
             break;
-	};*/
+	};
+    if (idle_enabled == true) {
+        --idle_timer;
+        if (idle_timer <= 0) {
+            idle_timer = timer_max;
+            tap_code(KC_F15);
+            oled_set_cursor(0,8);
+            idle_anim(anim_frame);
+            if (anim_frame < 3) {
+                ++anim_frame;
+                }
+            else {
+                anim_frame = 0;
+            };
+        };
+    };
     return false;
 };
 
@@ -130,14 +129,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 if (idle_enabled == true) {
                     idle_enabled = false;
-                    idle_timer = 0;
+                    idle_timer = timer_max;
                     oled_clear();
                 } else {
                     idle_enabled = true;
-                    idle_timer = 0;
+                    idle_timer = timer_max;
                 };
-                break;
-            } else {
             };
             break;
     };
