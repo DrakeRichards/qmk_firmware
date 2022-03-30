@@ -32,14 +32,14 @@ enum CUSTOM_KEYCODES {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_BASE] = LAYOUT(
-		KC_TAB  			, KC_Q    	, KC_W    				, KC_F    			, KC_P    	, KC_G                  , KC_J      , KC_L    			, KC_U      , KC_Y      , KC_SCLN   , KC_MINUS ,
-		LT(_RAISE, KC_ESC)  , KC_A    	, KC_R    				, KC_S    			, KC_T    	, KC_D                  , KC_H      , KC_N    			, KC_E      , KC_I      , KC_O      , KC_QUOT ,
-		KC_LALT 			, KC_Z    	, KC_X    				, KC_C    			, KC_V    	, KC_B      			, KC_K      , KC_M    			, KC_COMM   , KC_DOT    , KC_SLSH   , KC_BSLASH  ,
-	    LCTL_T(KC_ENT) 		, KC_LGUI 	, OSL(_FUNC)	        , LT(_SYMB, KC_BSPC), MO(_LOWER),KC_LSFT, OSM(MOD_MEH)   , KC_SPC    , LT(_RAISE, KC_DEL), KC_LEFT   ,KC_UP 	    , KC_DOWN   , KC_RIGHT
+		KC_TAB  			, KC_Q    	, KC_W    				, KC_F    			, KC_P    	, KC_G                              , KC_J      , KC_L    			, KC_U      , KC_Y      , KC_SCLN   , KC_MINUS ,
+		LT(_RAISE, KC_ESC)  , KC_A    	, KC_R    				, KC_S    			, KC_T    	, KC_D                              , KC_H      , KC_N    			, KC_E      , KC_I      , KC_O      , KC_QUOT ,
+		KC_LALT 			, KC_Z    	, KC_X    				, KC_C    			, KC_V    	, KC_B      			            , KC_K      , KC_M    			, KC_COMM   , KC_DOT    , KC_SLSH   , KC_BSLASH  ,
+	    LT(_SYMB, KC_ENTER) , KC_LGUI 	, OSL(_FUNC)	        , MO(_LOWER)        , KC_LCTL   , LSFT_T(KC_BSPC)   , OSM(MOD_MEH)  , KC_SPC    , LT(_RAISE, KC_DEL), KC_LEFT   ,KC_UP 	    , KC_DOWN   , KC_RIGHT
 	),
     [_LOWER] = LAYOUT(
 		KC_GRV              , KC_MINUS  , KC_7                  , KC_8              , KC_9      , KC_LCBR	            , KC_RCBR   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_PLUS  ,
-		KC_TRNS	            , KC_0      , KC_4	                , KC_5              , KC_6      , KC_LPRN               , KC_RPRN   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_EQL   ,
+		KC_COLN	            , KC_0      , KC_4	                , KC_5              , KC_6      , KC_LPRN               , KC_RPRN   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_EQL   ,
 		KC_TRNS             , KC_DOT    , KC_1                  , KC_2              , KC_3      , KC_LBRC               , KC_RBRC   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_NO   ,
 		KC_TRNS             , KC_TRNS   , KC_TRNS               , KC_TRNS           , KC_TRNS   , KC_TRNS   , KC_IDLE   , KC_NO     , MO(_ADJUST)       ,KC_HOME    ,KC_PGUP    , KC_PGDN   , KC_END
 	),
