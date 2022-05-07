@@ -51,8 +51,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TRNS             , KC_TRNS   , KC_TRNS               , KC_TRNS           , KC_TRNS   , KC_TRNS   , KC_IDLE   , KC_NO     , MO(_ADJUST)       ,KC_HOME    ,KC_PGUP    , KC_PGDN   , KC_END
 	),
 	[_RAISE] = LAYOUT(
-		KC_TRNS	, KC_PGUP	  , KC_HOME    , KC_UP    , KC_END	, KC_NO              , KC_NO    , KC_7    , KC_8    , KC_9    , KC_NO    , DF(_QWER)  ,
-		KC_TRNS	, KC_PGDN , KC_LEFT  , KC_DOWN , KC_RIGHT , KC_NO           , KC_NO   , KC_4 , KC_5 , KC_6   , KC_0 , DF(_BASE) ,
+		KC_TRNS	, KC_PGUP	  , KC_HOME    , KC_UP    , KC_END	, KC_NO              , KC_NO    , KC_7    , KC_8    , KC_9    , KC_NO    , TG(_QWER)  ,
+		KC_TRNS	, KC_PGDN , KC_LEFT  , KC_DOWN , KC_RIGHT , KC_NO           , KC_NO   , KC_4 , KC_5 , KC_6   , KC_0 , KC_NO ,
 		KC_TRNS	, KC_NO	  , KC_NO   , KC_NO   , KC_NO   , KC_NO             , KC_NO   , KC_1   , KC_2   , KC_3   , KC_NO   , KC_NO   ,
 		KC_TRNS , KC_TRNS , KC_TRNS ,KC_NO,KC_NO , KC_NO   , KC_NO , KC_NO   , KC_TRNS , KC_NO   , KC_TRNS , KC_TRNS , KC_TRNS
 	),
@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TRNS             , KC_TRNS           , KC_NO                 , KC_TRNS             , KC_NO         , KC_NO       , KC_NO               , KC_NO         , KC_NO         ,KC_NO          , KC_NO         , KC_NO         , KC_NO
 	),
 	[_ADJUST] = LAYOUT(
-		TG(_QWER) , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX           , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
+		XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX           , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
 		XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_CAPS           , KC_NLCK , KC_SLCK , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
 		XXXXXXX , XXXXXXX , TG(_BASE) , XXXXXXX , XXXXXXX , XXXXXXX           , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
 		KC_TRNS , KC_TRNS , KC_TRNS , XXXXXXX , XXXXXXX , XXXXXXX , RESET , XXXXXXX , XXXXXXX , XXXXXXX , KC_TRNS , KC_TRNS , KC_TRNS
