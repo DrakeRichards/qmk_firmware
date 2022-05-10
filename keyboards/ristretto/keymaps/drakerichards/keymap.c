@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TRNS	, KC_PGUP	  , KC_HOME    , KC_UP    , KC_END	, KC_NO              , KC_NO    , KC_7    , KC_8    , KC_9    , KC_NO    , KC_NO  ,
 		KC_TRNS	, KC_PGDN , KC_LEFT  , KC_DOWN , KC_RIGHT , KC_NO           , KC_NO   , KC_4 , KC_5 , KC_6   , KC_0 , KC_NO ,
 		KC_TRNS	, KC_NO	  , KC_NO   , KC_NO   , KC_NO   , KC_NO             , KC_NO   , KC_1   , KC_2   , KC_3   , KC_NO   , KC_NO   ,
-		KC_TRNS , KC_TRNS , KC_TRNS ,KC_NO,KC_NO , KC_NO   , TG(_QWER) , KC_MUTE   , KC_TRNS , LCTL_T(LGUI_T(KC_LEFT))   , KC_VOLU , KC_VOLD , LCTL_T(LGUI_T(KC_RIGHT))
+		KC_TRNS , KC_TRNS , KC_TRNS ,KC_NO,KC_NO , KC_RSFT   , TG(_QWER) , KC_MUTE   , KC_TRNS , LGUI(LCTL(KC_LEFT))   , KC_VOLU , KC_VOLD , LGUI(LCTL(KC_RIGHT))
 	),
 	[_FUNC] = LAYOUT(
 		KC_NO	, KC_NO	  , KC_F7    , KC_F8    , KC_F9	, KC_F12              , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO  ,
