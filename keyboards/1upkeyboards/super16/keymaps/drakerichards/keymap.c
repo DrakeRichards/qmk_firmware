@@ -24,7 +24,8 @@ enum LAYER_NAMES {
 };
 
 enum CUSTOM_KEYCODES {
-    IDLE
+    IDLE = SAFE_RANGE,
+    DCLICK
 };
 
 enum COMBOS {
@@ -79,11 +80,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LCTL_T(KC_ESC),     TO(TEXS),   KC_SPC,     KC_LSFT
   ),
 
-    [TEXS] = LAYOUT_ortho_4x4( /* Old School Runescape */
-        KC_1,       KC_2,       KC_3,       KC_4,
-        KC_F5,      KC_F6,      KC_F7,      KC_F8,
-        KC_F1,      KC_F2,      KC_F3,      KC_F4,
-        IDLE,     TO(NUMP),   KC_SPC,     KC_LSFT
+    [TEXS] = LAYOUT_ortho_4x4( /* Clicker/Idler */
+        KC_MS_BTN1,       KC_MS_BTN1,       KC_MS_BTN1,       KC_MS_BTN1,
+        KC_MS_BTN1,      KC_MS_BTN1,      KC_MS_BTN1,      KC_MS_BTN1,
+        DCLICK,      DCLICK,      DCLICK,      DCLICK,
+        IDLE,     TO(NUMP),   DCLICK,     DCLICK
   )
 };
 
@@ -98,8 +99,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     idle_enabled = true;
                     idle_timer = 0;
                 };
-                break;
             }
+            break;
+        case DCLICK:
+            if (record->event.pressed) {
+                send_string_with_delay(SS_TAP(KC_MS_BTN1), 100);
+            }
+            break;
     }
     return true;
 }
