@@ -16,9 +16,9 @@
 #include QMK_KEYBOARD_H
 
 enum LAYER_NAMES {
-    NUMP,
-    NUMF,
     NUMS,
+    NUMF,
+    NUMP,
     RUNE,
     TEXS
 };
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_PSLS,    KC_7,       KC_8,       KC_9,
         KC_PMNS,    KC_4,       KC_5,       KC_6,
         KC_PPLS,    KC_1,       KC_2,       KC_3,
-        KC_PAST,    TO(NUMF),   KC_DOT,     KC_0
+        KC_PAST,    TO(TEXS),   KC_DOT,     KC_0
   ),
 
     [NUMF] = LAYOUT_ortho_4x4( /* Function keys */
@@ -81,10 +81,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
     [TEXS] = LAYOUT_ortho_4x4( /* Clicker/Idler */
-        KC_MS_BTN1,       KC_MS_BTN1,       KC_MS_BTN1,       KC_MS_BTN1,
-        KC_MS_BTN1,      KC_MS_BTN1,      KC_MS_BTN1,      KC_MS_BTN1,
+        DCLICK,       KC_MS_BTN1,       KC_MS_BTN1,       KC_MS_BTN1,
+        DCLICK,      KC_MS_BTN1,      KC_MS_BTN1,      KC_MS_BTN1,
         DCLICK,      DCLICK,      DCLICK,      DCLICK,
-        IDLE,     TO(NUMP),   DCLICK,     DCLICK
+        IDLE,     TO(NUMS),   DCLICK,     DCLICK
   )
 };
 
@@ -103,7 +103,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case DCLICK:
             if (record->event.pressed) {
-                send_string_with_delay(SS_TAP(KC_MS_BTN1), 100);
+                send_string(SS_TAP(X_MS_BTN1) SS_DELAY(200) SS_TAP(X_MS_BTN1));
             }
             break;
     }
@@ -187,7 +187,7 @@ const rgblight_segment_t PROGMEM texas_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {1, 6, HSV_WHITE},
     {7, 2, HSV_BLUE},
     {9, 6, HSV_RED},
-    {15, 1, HSV_BLUE}
+    {15, 1, HSV_CYAN}
 );
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
