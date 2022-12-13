@@ -16,9 +16,9 @@
 #include QMK_KEYBOARD_H
 
 enum LAYER_NAMES {
+    NUMP,
     NUMS,
     NUMF,
-    NUMP,
     RUNE,
     TEXS
 };
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_PSLS,    KC_7,       KC_8,       KC_9,
         KC_PMNS,    KC_4,       KC_5,       KC_6,
         KC_PPLS,    KC_1,       KC_2,       KC_3,
-        KC_PAST,    TO(TEXS),   KC_DOT,     KC_0
+        KC_PAST,    TO(NUMF),   KC_DOT,     KC_0
   ),
 
     [NUMF] = LAYOUT_ortho_4x4( /* Function keys */
@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         DCLICK,       KC_MS_BTN1,       KC_MS_BTN1,       KC_MS_BTN1,
         DCLICK,      KC_MS_BTN1,      KC_MS_BTN1,      KC_MS_BTN1,
         DCLICK,      DCLICK,      DCLICK,      DCLICK,
-        IDLE,     TO(NUMS),   DCLICK,     DCLICK
+        IDLE,     TO(NUMP),   DCLICK,     DCLICK
   )
 };
 
