@@ -48,13 +48,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_GRV              , KC_MINUS  , KC_7                  , KC_8              , KC_9      , KC_LCBR	            , KC_RCBR   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_PLUS  ,
 		KC_COLN	            , KC_0      , KC_4	                , KC_5              , KC_6      , KC_LPRN               , KC_RPRN   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_EQL   ,
 		KC_TRNS             , KC_DOT    , KC_1                  , KC_2              , KC_3      , KC_LBRC               , KC_RBRC   , KC_NO             , KC_NO     , KC_NO     , KC_NO     , KC_NO   ,
-		KC_TRNS             , KC_TRNS   , KC_TRNS               , KC_TRNS           , KC_TRNS   , KC_TRNS   , KC_IDLE   , KC_NO     , MO(_ADJUST)       ,KC_HOME    ,KC_PGUP    , KC_PGDN   , KC_END
+		KC_TRNS             , KC_TRNS   , KC_TRNS               , KC_TRNS           , KC_TRNS   , KC_MUTE   , KC_IDLE   , KC_MPLY     , MO(_ADJUST)       , KC_MPRV    ,KC_VOLU    , KC_VOLD   , KC_MNXT
 	),
 	[_RAISE] = LAYOUT(
 		KC_TRNS	, KC_PGUP	  , KC_HOME    , KC_UP    , KC_END	, KC_NO              , KC_NO    , KC_7    , KC_8    , KC_9    , KC_NO    , KC_NO  ,
 		KC_TRNS	, KC_PGDN , KC_LEFT  , KC_DOWN , KC_RIGHT , KC_NO           , KC_NO   , KC_4 , KC_5 , KC_6   , KC_0 , KC_NO ,
 		KC_TRNS	, KC_NO	  , KC_NO   , KC_NO   , KC_NO   , KC_NO             , KC_NO   , KC_1   , KC_2   , KC_3   , KC_NO   , KC_NO   ,
-		KC_TRNS , KC_TRNS , KC_TRNS ,KC_NO,KC_NO , KC_RSFT   , TG(_QWER) , KC_MUTE   , KC_TRNS , LGUI(LCTL(KC_LEFT))   , KC_VOLU , KC_VOLD , LGUI(LCTL(KC_RIGHT))
+		KC_TRNS , KC_TRNS , KC_TRNS ,KC_NO,KC_NO , KC_RSFT   , TG(_QWER) , KC_MPLY   , KC_TRNS , LGUI(LCTL(KC_LEFT))   , KC_VOLU , KC_VOLD , LGUI(LCTL(KC_RIGHT))
 	),
 	[_FUNC] = LAYOUT(
 		KC_NO	, KC_NO	  , KC_F7    , KC_F8    , KC_F9	, KC_F12              , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO  ,
@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX           , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
 		XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , KC_CAPS           , KC_NLCK , KC_SLCK , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
 		XXXXXXX , XXXXXXX , TG(_BASE) , XXXXXXX , XXXXXXX , XXXXXXX           , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,
-		KC_TRNS , KC_TRNS , KC_TRNS , XXXXXXX , XXXXXXX , XXXXXXX , RESET , XXXXXXX , XXXXXXX , XXXXXXX , KC_TRNS , KC_TRNS , KC_TRNS
+		KC_TRNS , KC_TRNS , KC_TRNS , XXXXXXX , XXXXXXX , XXXXXXX , QK_BOOT , XXXXXXX , XXXXXXX , XXXXXXX , KC_TRNS , KC_TRNS , KC_TRNS
 	)
 /*  [_BLANK] = LAYOUT(
 		KC_TRNS             , KC_NO             , KC_NO                 , KC_NO             , KC_NO         , KC_NO	                            , KC_NO         , KC_NO         , KC_NO         , KC_NO         , KC_NO         , KC_NO  ,
@@ -85,7 +85,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // OLED and Encoder function is located in the ristretto.c File
 
 bool idle_enabled = false;
-const uint16_t timer_max = 1000;
 uint16_t idle_timer = timer_max;
 uint8_t anim_frame = 0;
 
@@ -110,6 +109,9 @@ bool oled_task_user(void) {
             break;
         case _SYMB:
             oled_write_P(PSTR("SYMB\n"), false);
+            oled_write_P(PSTR("&*~\n"), false);
+            oled_write_P(PSTR("$%^\n"), false);
+            oled_write_P(PSTR("!@#\n"), false);
             break;
         case _QWER:
             oled_write_P(PSTR("QWER\n"), false);
