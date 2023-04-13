@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #pragma once
-#include "config_common.h"
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 5
@@ -118,8 +117,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // If we have audio enabled, that means we're not using the left encoder, as they share a pin on the controller
 // Note that you need to solder the jumper on the pcb to use the audio buzzer on the pcb if you are not using the left encoder
 #ifdef AUDIO_ENABLE
-    #define ENCODERS_PAD_A {F1, B7}
-    #define ENCODERS_PAD_B {F0, D5}
+    #define ENCODERS_PAD_A {C7, B7}
+    #define ENCODERS_PAD_B {D2, D5}
     #define ENCODER_RESOLUTIONS { 2, 1 }
 #else
     #define ENCODERS_PAD_A {C7, F1, B7}
@@ -135,6 +134,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifdef AUDIO_ENABLE
+    // reduce the rgb brightness to avoid overloading
+    #ifdef RGBLIGHT_LIMIT_VAL
+      #undef RGBLIGHT_LIMIT_VAL
+      #define RGBLIGHT_LIMIT_VAL 100
+    #endif
+    #ifdef RGB_MATRIX_STARTUP_VAL
+      #undef RGB_MATRIX_STARTUP_VAL
+      #undef RGB_MATRIX_MAXIMUM_BRIGHTNESS
+      #define RGB_MATRIX_STARTUP_VAL 100
+      #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 100
+    #endif
     #define AUDIO_VOICES
     #define AUDIO_PIN F1
     #define AUDIO_PWM_DRIVER PWMD2
