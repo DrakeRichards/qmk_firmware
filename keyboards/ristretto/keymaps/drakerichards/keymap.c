@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TRNS	, KC_PGUP	  , KC_HOME    , KC_UP    , KC_END	, KC_NO              , KC_NO    , KC_7    , KC_8    , KC_9    , KC_NO    , KC_NO  ,
 		KC_TRNS	, KC_PGDN , KC_LEFT  , KC_DOWN , KC_RIGHT , KC_NO           , KC_NO   , KC_4 , KC_5 , KC_6   , KC_0 , KC_NO ,
 		KC_TRNS	, KC_NO	  , KC_NO   , KC_NO   , KC_NO   , KC_NO             , KC_NO   , KC_1   , KC_2   , KC_3   , KC_NO   , KC_NO   ,
-		KC_TRNS , KC_TRNS , KC_TRNS ,KC_NO,KC_NO , KC_RSFT   , TG(_QWER) , KC_MPLY   , KC_TRNS , LGUI(LCTL(KC_LEFT))   , KC_VOLU , KC_VOLD , LGUI(LCTL(KC_RIGHT))
+		KC_TRNS , KC_TRNS , KC_TRNS ,KC_NO,KC_NO , KC_RSFT   , TG(_QWER) , KC_MPLY   , KC_TRNS , LGUI(LCTL(KC_LEFT))   , DT_UP , DT_DOWN , LGUI(LCTL(KC_RIGHT))
 	),
 	[_FUNC] = LAYOUT(
 		KC_NO	, KC_NO	  , KC_F7    , KC_F8    , KC_F9	, KC_F12              , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO    , KC_NO  ,
@@ -88,35 +88,44 @@ bool idle_enabled = false;
 uint16_t idle_timer = timer_max;
 uint8_t anim_frame = 0;
 
+uint8_t layer_prev;
+
+bool display_tapping_term = true;
+uint16_t tapping_term_timer = timer_max;
+
 bool oled_task_user(void) {
+    // Clear the screen if a layer change occurred.
+    if (layer_prev != get_highest_layer(layer_state)) {
+        oled_clear();
+    }
+
 	oled_write_P(PSTR("\n\n"), false);
-	oled_write_ln_P(PSTR("LAYER"), false);
 	switch (get_highest_layer(layer_state)) {
 		case _BASE:
-			oled_write_P(PSTR("BASE\n"), false);
 			break;
 		case _RAISE:
-			oled_write_P(PSTR("RAISE\n"), false);
+			oled_write_ln_P(PSTR("RAISE"), false);
 			break;
 		case _LOWER:
-			oled_write_P(PSTR("LOWER\n"), false);
+			oled_write_ln_P(PSTR("LOWER"), false);
 			break;
 		case _ADJUST:
-			oled_write_P(PSTR("ADJ\n"), false);
+			oled_write_ln_P(PSTR("ADJ"), false);
 			break;
         case _FUNC:
-            oled_write_P(PSTR("FUNC\n"), false);
+            oled_write_ln_P(PSTR("FUNC"), false);
             break;
         case _SYMB:
-            oled_write_P(PSTR("SYMB\n"), false);
-            oled_write_P(PSTR("&*~\n"), false);
-            oled_write_P(PSTR("$%^\n"), false);
-            oled_write_P(PSTR("!@#\n"), false);
+            oled_write_ln_P(PSTR("SYMB\n"), false);
+            oled_write_ln_P(PSTR("& * ~"), false);
+            oled_write_ln_P(PSTR("$ % ^"), false);
+            oled_write_ln_P(PSTR("! @ #"), false);
             break;
         case _QWER:
-            oled_write_P(PSTR("QWER\n"), false);
+            oled_write_ln_P(PSTR("QWER"), false);
             break;
-	};
+	}
+
     if (idle_enabled == true) {
         --idle_timer;
         if (idle_timer <= 0) {
@@ -129,11 +138,30 @@ bool oled_task_user(void) {
                 }
             else {
                 anim_frame = 0;
-            };
-        };
-    };
+            }
+        }
+    }
+
+    if (display_tapping_term) {
+        --tapping_term_timer;
+        if (tapping_term_timer > 0) {
+            char c_tapping_term[24];
+            const char *read_tapping_term_info(void) {
+                snprintf(c_tapping_term, sizeof(c_tapping_term),"TT: \n%d",g_tapping_term);
+                return c_tapping_term;
+            }
+            oled_write_ln(read_tapping_term_info(), false);
+        } else {
+            oled_write_ln_P(PSTR("\n\n"),false);
+            tapping_term_timer = 0;
+            display_tapping_term = false;
+        }
+    }
+
+    layer_prev = get_highest_layer(layer_state);
+
     return false;
-};
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -146,15 +174,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 } else {
                     idle_enabled = true;
                     idle_timer = timer_max;
-                };
-            };
+                }
+            }
             break;
-    };
+        case DT_UP:
+            tapping_term_timer = timer_max;
+            display_tapping_term = true;
+            break;
+        case DT_DOWN:
+            tapping_term_timer = timer_max;
+            display_tapping_term = true;
+            break;
+    }
     return true;
-};
+}
 
 void matrix_init_user(void) {
-};
+}
 
 void matrix_scan_user(void) {
-};
+}
