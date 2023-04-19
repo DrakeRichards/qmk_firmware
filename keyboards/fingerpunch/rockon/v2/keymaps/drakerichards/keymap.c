@@ -12,7 +12,6 @@
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
-    _WORK,
     _COLEMAK,
     _GAMING,
     _RUNE,
@@ -39,20 +38,12 @@ bool idle_enabled = false;
 //                           KC_LCTL,   KC_LGUI,   LOWER,     KC_SPC,    KC_LALT, --->  KC_MUTE, LCTL(KC_BSPC), <--- KC_RALT,   KC_SPC,    RAISE,     KC_RGUI,   KC_RCTL
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-[_WORK] = LAYOUT_rockon(
-    OSM(MOD_LGUI),KC_EXCLAIM,KC_AT,  KC_HASH,   KC_DOLLAR, KC_PERC,   KC_F5  ,                            KC_MPRV,   KC_CIRC,   KC_AMPR,   KC_ASTR,   KC_LPRN,   KC_RPRN,   KC_EQL,
-    KC_TAB,    KC_Q,      KC_W,      KC_F,      KC_P,      KC_G,      KC_GRV ,                            KC_MNXT,   KC_J,      KC_L,      KC_U,      KC_Y,      KC_SCLN,   KC_MINS,
-    LT(_RAISE,KC_ESC),KC_A,KC_R,     KC_S,      KC_T,      KC_D,      KC_BSPC,                            KC_MPLY,   KC_H,      KC_N,      KC_E,      KC_I,      KC_O,      KC_QUOT,
-    KC_ENT,    KC_Z,      KC_X,      KC_C,      KC_V,      KC_B,      KC_LALT,                       KC_DEL,    KC_K,      KC_M,      KC_COMM,   KC_DOT,    KC_SLSH,   KC_BACKSLASH,
-                          KC_NO,     OSM(MOD_MEH),LT(_LOWER,KC_BSPC), KC_LSFT,   KC_LCTL,      KC_MUTE, TG(_ADJUST),   RAISE,     KC_SPC,    KC_DEL,     TO(_GAMING),   KC_NO
-),
-
 [_COLEMAK] = LAYOUT_rockon(
-    KC_GRV,    KC_EXCLAIM,KC_AT,     KC_HASH,   KC_DOLLAR, KC_PERC,   KC_LCBR,                            KC_RCBR,   KC_CIRC,   KC_AMPR,   KC_ASTR,   KC_LPRN,   KC_RPRN,   KC_EQL,
-    KC_TAB,    KC_Q,      KC_W,      KC_F,      KC_P,      KC_G,      KC_LPRN,                            KC_RPRN,   KC_J,      KC_L,      KC_U,      KC_Y,      KC_SCLN,   KC_MINS,
-    LT(_RAISE,KC_ESC),KC_A,KC_R,     KC_S,      KC_T,      KC_D,      KC_LBRC,                            KC_RBRC,   KC_H,      KC_N,      KC_E,      KC_I,      KC_O,      KC_QUOT,
-    LALT_T(KC_ENT), KC_Z, KC_X,      KC_C,      KC_V,      KC_B,      OSM(MOD_MEH),                       KC_DEL,    KC_K,      KC_M,      KC_COMM,   KC_DOT,    KC_SLSH,   KC_BACKSLASH,
-                          KC_NO,     KC_LGUI,   LCTL_T(KC_BSPC),KC_LSFT,LOWER,    _______, _______,       RAISE,     KC_SPC,    KC_DEL,     TO(_GAMING),   KC_NO
+    KC_GRV,    KC_EXCLAIM,KC_AT,     KC_HASH,   KC_DOLLAR, KC_PERC,   KC_F5,                              KC_MPRV,   KC_CIRC,   KC_AMPR,   KC_ASTR,   KC_LPRN,   KC_RPRN,   KC_EQL,
+    KC_TAB,    KC_Q,      KC_W,      KC_F,      KC_P,      KC_G,      KC_INS,                             KC_MNXT,   KC_J,      KC_L,      KC_U,      KC_Y,      KC_SCLN,   KC_MINS,
+    LT(_RAISE,KC_ESC),KC_A,KC_R,     KC_S,      KC_T,      KC_D,      OSM(MOD_MEH),                       KC_MPLY,   KC_H,      KC_N,      KC_E,      KC_I,      KC_O,      KC_QUOT,
+    KC_ENT,    KC_Z,      KC_X,      KC_C,      KC_V,      KC_B,      KC_LALT,                            KC_DEL,    KC_K,      KC_M,      KC_COMM,   KC_DOT,    KC_SLSH,   KC_BACKSLASH,
+                          KC_NO,     KC_LGUI,   LT(_LOWER,KC_BSPC),KC_LSFT,KC_LCTL, KC_MUTE, TG(_ADJUST), RAISE,     KC_SPC,    KC_DEL,     TO(_GAMING),   KC_NO
 ),
 
 [_GAMING] = LAYOUT_rockon(
@@ -68,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,    KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_GRV ,                            KC_MNXT,   KC_J,      KC_L,      KC_U,      KC_Y,      KC_SCLN,   KC_MINS,
     LT(_RAISE,KC_ESC),KC_F1,KC_F2,     KC_F3,      KC_F4,      KC_F5,      KC_BSPC,                            KC_MPLY,   KC_H,      KC_N,      KC_E,      KC_I,      KC_O,      KC_QUOT,
     KC_ENT,    KC_1,      KC_2,      KC_3,      KC_4,      KC_5,      KC_LALT,                       KC_DEL,    KC_K,      KC_M,      KC_COMM,   KC_DOT,    KC_SLSH,   KC_BACKSLASH,
-                          KC_NO,     KC_BTN1,   LT(_LOWER,KC_SPC), KC_LSFT,   KC_LCTL,      KC_MUTE, TG(_ADJUST),   RAISE,     KC_SPC,    KC_DEL,     TO(_WORK),   KC_NO
+                          KC_NO,     KC_BTN1,   LT(_LOWER,KC_SPC), KC_LSFT,   KC_LCTL,      KC_MUTE, TG(_ADJUST),   RAISE,     KC_SPC,    KC_DEL,     TO(_COLEMAK),   KC_NO
 ),
 
 [_LOWER] = LAYOUT_rockon(
@@ -242,16 +233,12 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 void render_status(void) {
     // Host Keyboard Layer Status
-    oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state|default_layer_state)) {
         case _GAMING:
             oled_write_P(PSTR("Gaming\n"), false);
             break;
         case _COLEMAK:
-            oled_write_P(PSTR("Colemak\n"), false);
-            break;
-        case _WORK:
-            oled_write_P(PSTR("Colemak(Work)\n"), false);
+            oled_write_P(PSTR("\n"), false);
             break;
         case _LOWER:
             oled_write_P(PSTR("Lower\n"), false);
@@ -270,31 +257,16 @@ void render_status(void) {
     }
 
     // Write host Keyboard LED Status to OLEDs
-    led_t led_usb_state = host_keyboard_led_state();
+/*     led_t led_usb_state = host_keyboard_led_state();
     oled_write_P(led_usb_state.num_lock    ? PSTR("NUMLCK ") : PSTR("       "), false);
     oled_write_P(led_usb_state.caps_lock   ? PSTR("CAPLCK ") : PSTR("       "), false);
-    oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
+    oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false); */
 }
 
 bool oled_task_user(void) {
 	render_status();
     render_cat_dance();
-/*    if (idle_enabled == true) {
-        --idle_timer;
-        if (idle_timer <= 0) {
-            idle_timer = timer_max;
-            tap_code(KC_F15);
-            oled_set_cursor(0,8);
-            idle_anim(anim_frame);
-            if (anim_frame < 3) {
-                ++anim_frame;
-                }
-            else {
-                anim_frame = 0;
-            };
-        };
-    };
-    */
+
     return true;
 };
 
