@@ -1,0 +1,3 @@
+PIN_COMPATIBLE=elite_c
+
+DEFERRED_EXEC_ENABLE = yes
