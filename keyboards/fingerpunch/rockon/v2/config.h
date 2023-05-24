@@ -36,9 +36,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef CIRQUE_ENABLE
   #define CIRQUE_PINNACLE_ADDR 0x2A
-  #define POINTING_DEVICE_ROTATION_90
+  // #define POINTING_DEVICE_ROTATION_90
   // If using fingerpunch case
-  // #define POINTING_DEVICE_ROTATION_270
+  #define POINTING_DEVICE_ROTATION_270
   // If using chewiedies case
   #define CIRQUE_PINNACLE_TAP_ENABLE
   #define POINTING_DEVICE_TASK_THROTTLE_MS 5

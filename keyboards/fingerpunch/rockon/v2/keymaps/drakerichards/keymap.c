@@ -1,7 +1,6 @@
 #include QMK_KEYBOARD_H
 
 #ifdef PIMORONI_TRACKBALL_ENABLE
-#include "drivers/sensors/pimoroni_trackball.h"
 #include "pointing_device.h"
 #include "color.h"
 #endif

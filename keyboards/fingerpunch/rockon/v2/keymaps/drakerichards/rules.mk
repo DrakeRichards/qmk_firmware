@@ -1,6 +1,14 @@
-CIRQUE_ENABLE = yes
+# Cirque settings
+   MOUSEKEY_ENABLE := yes  # not required, but enabling for mouse button keys
+   POINTING_DEVICE_ENABLE := yes
+   POINTING_DEVICE_DRIVER := cirque_pinnacle_i2c
+   OPT_DEFS += -DCIRQUE_ENABLE
+
 RGBLIGHT_ENABLE = yes
 OLED_ENABLE = yes
 ENCODER_ENABLE = yes
-PIMONORI_TRACKBALL_ENABLE = no
+
+# Stemcell settings
 CONVERT_TO = stemcell
+EEPROM_DRIVER = wear_leveling
+WEAR_LEVELING_DRIVER = legacy

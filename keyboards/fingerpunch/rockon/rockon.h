@@ -24,5 +24,3 @@
 #elif defined(KEYBOARD_fingerpunch_rockon_v3)
 #    include "v3.h"
 #endif
-
-#include "keyboards/fingerpunch/src/fp.h"
