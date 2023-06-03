@@ -1,19 +1,8 @@
-// BEGIN PWM driver: uncomment if using STeMcell as it's a better led driver
-// #define WS2812_PWM_DRIVER PWMD2  // default: PWMD2
-// #define WS2812_PWM_CHANNEL 2  // default: 2
-// #define WS2812_PWM_PAL_MODE 2  // Pin "alternate function", see the respective datasheet for the appropriate values for your MCU. default: 2
-// #define WS2812_DMA_STREAM STM32_DMA1_STREAM2  // DMA Stream for TIMx_UP, see the respective reference manual for the appropriate values for your MCU.
-// #define WS2812_DMA_CHANNEL 2  // DMA Channel for TIMx_UP, see the respective reference manual for the appropriate values for your MCU.
-// #define WS2812_DMAMUX_ID STM32_DMAMUX1_TIM2_UP // DMAMUX configuration for TIMx_UP -- only required if your MCU has a DMAMUX peripheral, see the respective reference manual for the appropriate values for your MCU.
-// END PWM driver: uncomment if using STeMcell as it's a better led driver
+// Tap-hold behavior
+#define TAPPING_TERM 200
+#define PERMISSIVE_HOLD
 
-#define I2C1_CLOCK_SPEED 400000
-#define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_2
-
-#ifdef OLED_ENABLE
-#    define OLED_DISPLAY_128X64
-#endif
-
+// Cirque
 #ifdef CIRQUE_ENABLE
 #    define CIRQUE_PINNACLE_ADDR 0x2A
 #    define POINTING_DEVICE_ROTATION_90
@@ -36,10 +25,19 @@
 #    define POINTING_DEVICE_GESTURES_SCROLL_ENABLE
 #endif
 
-#define TAPPING_TERM 200
-#define PERMISSIVE_HOLD
-
+// Encoder
 #ifdef ENCODER_RESOLUTION
 #    undef ENCODER_RESOLUTION
 #endif
 #define ENCODER_RESOLUTION 4
+
+// OLED
+#ifdef OLED_ENABLE
+#    define OLED_DISPLAY_128X64
+#endif
+
+// RGB
+#ifdef RGBLIGHT_ENABLE
+#    define RGBLIGHT_LAYERS
+#    define RGBLIGHT_LAYERS_RETAIN_VAL
+#endif

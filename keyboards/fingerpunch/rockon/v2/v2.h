@@ -28,7 +28,7 @@
 
 #define ___ KC_NO
 
-#define LAYOUT_default( \
+#define LAYOUT_all( \
     K51, K01, K02, K03, K04, K05, K63,           K66, K06, K07, K08, K09, K54, K69, \
     K61, K11, K12, K13, K14, K15, K73,           K76, K16, K17, K18, K19, K56, K79, \
     K71, K21, K22, K23, K24, K25, K64,           K67, K26, K27, K28, K29, K57, K68, \
