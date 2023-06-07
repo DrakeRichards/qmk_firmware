@@ -5,10 +5,8 @@
 // Cirque
 #ifdef CIRQUE_ENABLE
 #    define CIRQUE_PINNACLE_ADDR 0x2A
-#    define POINTING_DEVICE_ROTATION_90
-// If using fingerpunch case
-// #define POINTING_DEVICE_ROTATION_270
-// If using chewiedies case
+#    define POINTING_DEVICE_ROTATION_90 // If using fingerpunch case
+// #define POINTING_DEVICE_ROTATION_270 // If using chewiedies case
 // #    define CIRQUE_PINNACLE_TAP_ENABLE
 #    define POINTING_DEVICE_TASK_THROTTLE_MS 5
 #    define I2C1_CLOCK_SPEED 400000
@@ -22,7 +20,8 @@
 #        define CIRQUE_PINNACLE_TOUCH_DEBOUNCE 9999
 #    endif
 #    define POINTING_DEVICE_GESTURES_CURSOR_GLIDE_ENABLE
-#    define POINTING_DEVICE_GESTURES_SCROLL_ENABLE
+//#    define POINTING_DEVICE_GESTURES_SCROLL_ENABLE
+#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #endif
 
 // Encoder
