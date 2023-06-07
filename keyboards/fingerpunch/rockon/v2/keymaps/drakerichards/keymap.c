@@ -12,7 +12,8 @@ enum layer_names {
     _RSC,
     _LWR,
     _RSE,
-    _ADJ
+    _ADJ,
+    _MSE
 };
 
 enum custom_keycodes {
@@ -38,7 +39,7 @@ bool idle_enabled = false;
 //                           KC_LCTL,   KC_LGUI,   LOWER,     KC_SPC,    KC_LALT, --->  KC_MUTE, LCTL(KC_BSPC), <--- KC_RALT,   KC_SPC,    RAISE,     KC_RGUI,   KC_RCTL
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-[_CLM] = LAYOUT_all(
+[_CLM] = LAYOUT(
 KC_GRV,     KC_EXLM,    KC_AT,      KC_HASH,    KC_DLR,     KC_PERC,    KC_F5,                                          KC_MPRV,    KC_CIRC,    KC_AMPR,    KC_ASTR,    KC_LPRN,    KC_RPRN,    KC_EQL,
 KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_G,       KC_INS,                                         KC_MNXT,    KC_J,       KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_MINS,
 MC_RESC,    KC_A,       KC_R,       KC_S,       KC_T,       KC_D,       MC_OSMM,                                        KC_MPLY,    KC_H,       KC_N,       KC_E,       KC_I,       KC_O,       KC_QUOT,
@@ -46,7 +47,7 @@ KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_LALT,
                         KC_NO,      KC_LGUI,    MC_LBSP,    KC_LSFT,    KC_LCTL,    KC_MUTE,                TG(_ADJ),   MO(_RSE),   KC_SPC,     KC_DEL,     TO(_GAM),   KC_NO
 ),
 
-[_GAM] = LAYOUT_all(
+[_GAM] = LAYOUT(
 KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_LCBR,                                        KC_RCBR,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_BSPC,
 KC_TAB,     KC_T,       KC_Q,       KC_W,       KC_E,       KC_R,       KC_LPRN,                                        KC_RPRN,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSLS,
 KC_ESC,     KC_G,       KC_A,       KC_S,       KC_D,       KC_F,       KC_LBRC,                                        KC_RBRC,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
@@ -54,7 +55,7 @@ KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_BSPC,
                         KC_NO,      KC_LALT,    KC_LCTL,    KC_SPC,     KC_LSFT,    _______,                _______,    KC_RALT,    KC_SPC,     MO(_RSE),   TO(_RSC),   KC_NO
 ),
 
-[_RSC] = LAYOUT_all(
+[_RSC] = LAYOUT(
 MC_OSMG,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F5,                                          KC_MPRV,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
 KC_TAB,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_GRV,                                         KC_MNXT,    KC_J,       KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_MINS,
 MC_RESC,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_BSPC,                                        KC_MPLY,    KC_H,       KC_N,       KC_E,       KC_I,       KC_O,       KC_QUOT,
@@ -62,7 +63,7 @@ KC_ENT,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_LALT,
                         KC_NO,      KC_BTN1,    MC_LSPC,    KC_LSFT,    KC_LCTL,    KC_MUTE,                TG(_ADJ),   MO(_RSE),   KC_SPC,     KC_DEL,     TO(_CLM),   KC_NO
 ),
 
-[_LWR] = LAYOUT_all(
+[_LWR] = LAYOUT(
 KC_GRV,     _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    KC_MINS,    KC_EQL,     _______,
 _______,    KC_MINS,    KC_7,       KC_8,       KC_9,       KC_LCBR,    _______,                                        _______,    KC_RCBR,    _______,    _______,    _______,    _______,    _______,
 KC_COLON,   KC_0,       KC_4,       KC_5,       KC_6,       KC_LPRN,    MC_WLFT,                                        MC_WRGT,    KC_RPRN,    _______,    _______,    _______,    _______,    _______,
@@ -70,7 +71,7 @@ _______,    KC_DOT,     KC_1,       KC_2,       KC_3,       KC_LBRC,    _______,
                         _______,    KC_IDLE,    _______,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    _______,    _______
 ),
 
-[_RSE] = LAYOUT_all(
+[_RSE] = LAYOUT(
 _______,    _______,    _______,    KC_PGUP,    _______,    _______,    _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
 _______,    _______,    KC_HOME,    KC_UP,      KC_END,     _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    KC_LEFT,    KC_DOWN,    KC_RGHT,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
@@ -78,12 +79,20 @@ _______,    _______,    _______,    KC_PGDN,    _______,    _______,    _______,
                         _______,    _______,    _______,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    _______,    _______
 ),
 
-[_ADJ] =  LAYOUT_all(
+[_ADJ] = LAYOUT(
 RESET,      KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______,
 _______,    RGB_TOG,    RGB_RMOD,   RGB_MOD,    _______,    TG(_GAM),   _______,                                        _______,    _______,    _______,    _______,    KC_F11,     KC_F12,     _______,
 _______,    RGB_SPI,    RGB_HUI,    RGB_SAI,    RGB_VAI,    TG(_CLM),   _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    RGB_SPD,    RGB_HUD,    RGB_SAD,    RGB_VAD,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
                         _______,    _______,    _______,    _______,    _______,    QK_BOOT,                _______,    _______,    _______,    _______,    _______,    _______
+),
+
+[_MSE] = LAYOUT(
+_______,    _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
+_______,    _______,    KC_WH_L,    KC_WH_U,    KC_WH_R,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    _______,    KC_BTN3,    KC_BTN2,    KC_BTN1,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    _______,    _______,    KC_WH_D,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                        _______,    _______,    _______,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    _______,    _______
 )
 };
 
@@ -214,13 +223,24 @@ _______,    RGB_SPD,    RGB_HUD,    RGB_SAD,    RGB_VAD,    _______,    _______,
     const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
         {0, 65, HSV_BLUE}
     );
+    const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+        {0, 65, HSV_PURPLE}
+    );
 
     const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
         my_layer0_layer,
         my_layer1_layer,
         my_layer2_layer,
-        my_layer3_layer
+        my_layer3_layer,
+        my_layer4_layer
     );
+#endif
+
+#ifdef CIRQUE_ENABLE
+    void pointing_device_init_user(void) {
+        set_auto_mouse_layer(_MSE); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
+        set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
+    }
 #endif
 
 void keyboard_post_init_user(void) {
@@ -295,6 +315,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(1, layer_state_cmp(state, _LWR));
     rgblight_set_layer_state(2, layer_state_cmp(state, _RSE));
     rgblight_set_layer_state(3, layer_state_cmp(state, _ADJ));
+    rgblight_set_layer_state(4, layer_state_cmp(state, _MSE));
     return state;
 }
 
@@ -317,12 +338,12 @@ qmk-keyboard-format:json:begin
         8
     ],
     "vizemits": [
-        { "line": "[_CLM] = LAYOUT(", "layer": "_CLM" },
-        { "line": "[_GAM] = LAYOUT(", "layer": "_GAM" },
-        { "line": "[_RSC] = LAYOUT(", "layer": "_RSC" },
-        { "line": "[_LWR] = LAYOUT(", "layer": "_LWR" },
-        { "line": "[_RSE] = LAYOUT(", "layer": "_RSE" },
-        { "line": "[_ADJ] = LAYOUT(", "layer": "_ADJ" }
+        { "line": "[_CLM] = LAYOUT_(", "layer": "_CLM" },
+        { "line": "[_GAM] = LAYOUT_(", "layer": "_GAM" },
+        { "line": "[_RSC] = LAYOUT_(", "layer": "_RSC" },
+        { "line": "[_LWR] = LAYOUT_(", "layer": "_LWR" },
+        { "line": "[_RSE] = LAYOUT_(", "layer": "_RSE" },
+        { "line": "[_ADJ] = LAYOUT_(", "layer": "_ADJ" }
     ],
     "vizline": "//#",
     "vizboard": [
