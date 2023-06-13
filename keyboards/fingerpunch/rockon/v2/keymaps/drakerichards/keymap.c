@@ -197,6 +197,9 @@ _______,    _______,    _______,    KC_WH_D,    _______,    _______,    _______,
             case _RSC:
                 oled_write_P(PSTR("RuneScape\n"), false);
                 break;
+            case _MSE:
+                oled_write_P(PSTR("Mouse\n"), false);
+                break;
             default:
                 oled_write_P(PSTR("Undefined\n"), false);
         }
@@ -236,7 +239,7 @@ _______,    _______,    _______,    KC_WH_D,    _______,    _______,    _______,
     );
 #endif
 
-#ifdef CIRQUE_ENABLE
+#ifdef POINTING_DEVICE_ENABLE
     void pointing_device_init_user(void) {
         set_auto_mouse_layer(_MSE); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
         set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
