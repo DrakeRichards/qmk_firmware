@@ -82,7 +82,7 @@ _______,    _______,    _______,    KC_PGDN,    _______,    _______,    _______,
 [_ADJ] = LAYOUT(
 RESET,      KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______,
 _______,    RGB_TOG,    RGB_RMOD,   RGB_MOD,    _______,    TG(_GAM),   _______,                                        _______,    _______,    _______,    _______,    KC_F11,     KC_F12,     _______,
-_______,    RGB_SPI,    RGB_HUI,    RGB_SAI,    RGB_VAI,    TG(_CLM),   _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    RGB_SPI,    RGB_HUI,    RGB_SAI,    RGB_VAI,    TG(_CLM),   CG_TOGG,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    RGB_SPD,    RGB_HUD,    RGB_SAD,    RGB_VAD,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
                         _______,    _______,    _______,    _______,    _______,    QK_BOOT,                _______,    _______,    _______,    _______,    _______,    _______
 ),
@@ -126,8 +126,12 @@ _______,    _______,    _______,    KC_WH_D,    _______,    _______,    _______,
     #define ANIM_FRAME_DURATION 1000 // how long each animation frame lasts in ms
     #define ANIM_SIZE 1024 // number of pixels in 128x32 display
 
+    // animation constants
     uint32_t anim_timer = 0;
     uint8_t curr_anim_frame = 0;
+
+    // status constants
+    bool cg_toggle_enabled = false;
 
     void render_cat_dance(void) {
         static const char PROGMEM DanceAnimation[ANIM_FRAMES][ANIM_SIZE] = {
@@ -203,6 +207,11 @@ _______,    _______,    _______,    KC_WH_D,    _______,    _______,    _______,
             default:
                 oled_write_P(PSTR("Undefined\n"), false);
         }
+
+        if (cg_toggle_enabled) { oled_write_P(PSTR("Mac mode\n"), false); }
+        else { oled_write_P(PSTR("\n"), false); }
+
+
     }
 
     bool oled_task_user(void) {
@@ -211,6 +220,7 @@ _______,    _______,    _______,    KC_WH_D,    _______,    _______,    _______,
 
         return true;
     };
+
 #endif
 
 #ifdef RGBLIGHT_ENABLE
@@ -218,10 +228,10 @@ _______,    _______,    _______,    KC_WH_D,    _______,    _______,    _______,
         {0, 65, HSV_RED}
     );
     const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 65, HSV_GREEN}
+        {0, 65, HSV_ORANGE}
     );
     const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 65, HSV_YELLOW}
+        {0, 65, 213, 255, 64}
     );
     const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
         {0, 65, HSV_BLUE}
@@ -302,6 +312,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 };
             };
             break;
+        case CG_TOGG:
+            if (record->event.pressed) {
+                cg_toggle_enabled = !cg_toggle_enabled;
+            }
         default:
             break;
     }
