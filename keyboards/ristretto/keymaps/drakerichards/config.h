@@ -4,7 +4,8 @@
 
 #ifdef TAPPING_TERM
     #undef TAPPING_TERM
-    #define TAPPING_TERM 200
 #endif
 
-#define PERMISSIVE_HOLD
+#define TAPPING_TERM 160
+
+//#define PERMISSIVE_HOLD
