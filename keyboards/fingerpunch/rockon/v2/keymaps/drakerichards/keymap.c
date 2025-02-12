@@ -14,6 +14,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+// QMK_KEYBOARD_H doesn't play well with clangd. See [#23968](https://github.com/qmk/qmk_firmware/issues/23968).
+// Solution is to use `bear` to generate the compilation database.
+// See [this reply](https://github.com/qmk/qmk_firmware/issues/23968#issuecomment-2550321135).
+// Command: `bear -- qmk compile -kb fingerpunch/rockon/v2 -km drakerichards`
+// Run this any time you change config.h or rules.mk.
 #include QMK_KEYBOARD_H
 
 // Defines names for use in layer keycodes and the keymap
