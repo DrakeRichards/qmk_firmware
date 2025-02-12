@@ -1,0 +1,6 @@
+{
+    "keyboard_name": "rock on",
+    "usb": {
+        "pid": "0x1200"
+    }
+}

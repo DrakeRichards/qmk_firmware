@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include_next "mcuconf.h"
+#include_next <mcuconf.h>
 
 // BEGIN PWM driver: uncomment if using STeMcell as it's a better led driver
 // #undef STM32_PWM_USE_TIM2

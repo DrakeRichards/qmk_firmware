@@ -1,9 +1,20 @@
-#include QMK_KEYBOARD_H
+/*
+Copyright 2025 Thomas Young <thomasjyoung8@gmail.com>
 
-#ifdef PIMORONI_TRACKBALL_ENABLE
-#include "pointing_device.h"
-#include "color.h"
-#endif
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+#include QMK_KEYBOARD_H
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
@@ -61,15 +72,7 @@ KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_LCBR,
 KC_TAB,     KC_T,       KC_Q,       KC_W,       KC_E,       KC_R,       KC_LPRN,                                        KC_RPRN,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSLS,
 KC_ESC,     KC_G,       KC_A,       KC_S,       KC_D,       KC_F,       KC_LBRC,                                        KC_RBRC,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
 KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_BSPC,                                        ADJUST,     KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_ENT,
-                        KC_NO,      KC_LALT,    KC_LCTL,    KC_SPC,     KC_LSFT,    _______,                _______,    KC_RALT,    KC_SPC,     MO(_RSE),   TO(_RSC),   KC_NO
-),
-
-[_RSC] = LAYOUT(
-MC_OSMG,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F5,                                          KC_MPRV,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
-KC_TAB,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_GRV,                                         KC_MNXT,    KC_J,       KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_MINS,
-MC_RESC,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_BSPC,                                        KC_MPLY,    KC_H,       KC_N,       KC_E,       KC_I,       KC_O,       KC_QUOT,
-KC_ENT,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_LALT,                                        KC_DEL,     KC_K,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_BSLS,
-                        KC_NO,      KC_BTN1,    MC_LSPC,    KC_LSFT,    KC_LCTL,    KC_MUTE,                TG(_ADJ),   MO(_RSE),   KC_SPC,     KC_DEL,     TO(_CLM),   KC_NO
+                        KC_NO,      KC_LALT,    KC_LCTL,    KC_SPC,     KC_LSFT,    _______,                _______,    KC_RALT,    KC_SPC,     MO(_RSE),   TO(_CLM),   KC_NO
 ),
 
 [_LWR] = LAYOUT(
@@ -89,7 +92,7 @@ _______,    _______,    _______,    KC_PGDN,    _______,    _______,    _______,
 ),
 
 [_ADJ] = LAYOUT(
-RESET,      KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______,
+QK_BOOT,      KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______,
 _______,    RGB_TOG,    RGB_RMOD,   RGB_MOD,    _______,    TG(_GAM),   _______,                                        _______,    _______,    _______,    _______,    KC_F11,     KC_F12,     _______,
 _______,    RGB_SPI,    RGB_HUI,    RGB_SAI,    RGB_VAI,    TG(_CLM),   CG_TOGG,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    RGB_SPD,    RGB_HUD,    RGB_SAD,    RGB_VAD,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
@@ -105,29 +108,17 @@ _______,    _______,    _______,    KC_WH_D,    _______,    _______,    _______,
 )
 };
 
-#ifdef ENCODER_ENABLE
-    bool encoder_update_user(uint8_t index, bool clockwise) {
-        switch (index)
-        {
-        case 0:
-            if (clockwise) {
-                tap_code_delay(KC_VOLD, 10);
-            } else {
-                tap_code_delay(KC_VOLU, 10);
-            }
-            break;
-        case 1:
-            if (clockwise) {
-                tap_code_delay(KC_LEFT, 10);
-            } else {
-                tap_code_delay(KC_RIGHT, 10);
-            }
-            break;
-        default:
-            break;
-        }
-        return false;
-    }
+#if defined (ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+    [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+    [1] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+    [2] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+    [3] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+    [4] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+    [5] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+    [6] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+    [7] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+};
 #endif
 
 #ifdef OLED_ENABLE
@@ -209,9 +200,6 @@ _______,    _______,    _______,    KC_WH_D,    _______,    _______,    _______,
                 break;
             case _ADJ:
                 oled_write_P(PSTR("Adjust\n"), false);
-                break;
-            case _RSC:
-                oled_write_P(PSTR("RuneScape\n"), false);
                 break;
             case _MSE:
                 oled_write_P(PSTR("Mouse\n"), false);

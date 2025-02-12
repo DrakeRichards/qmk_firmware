@@ -1,0 +1,7 @@
+{
+    "manufacturer": "sadekbaroudi",
+    "maintainer": "Sadek Baroudi <sadekbaroudi@gmail.com>",
+    "usb": {
+        "vid": "0xFEFE"
+    }
+}

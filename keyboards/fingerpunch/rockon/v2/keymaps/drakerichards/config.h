@@ -1,6 +1,6 @@
 // Tap-hold behavior
-#define TAPPING_TERM 200
-#define PERMISSIVE_HOLD
+// #define TAPPING_TERM 200
+// #define PERMISSIVE_HOLD
 
 // Cirque
 #ifdef POINTING_DEVICE_ENABLE
@@ -25,10 +25,7 @@
 #endif
 
 // Encoder
-#ifdef ENCODER_RESOLUTION
-#    undef ENCODER_RESOLUTION
-#endif
-#define ENCODER_RESOLUTION 4
+#define ENCODER_MAP_KEY_DELAY 10
 
 // OLED
 #ifdef OLED_ENABLE
@@ -36,7 +33,7 @@
 #endif
 
 // RGB
-#ifdef RGBLIGHT_ENABLE
-#    define RGBLIGHT_LAYERS
-#    define RGBLIGHT_LAYERS_RETAIN_VAL
-#endif
+// #ifdef RGBLIGHT_ENABLE
+// #    define RGBLIGHT_LAYERS
+// #    define RGBLIGHT_LAYERS_RETAIN_VAL
+// #endif

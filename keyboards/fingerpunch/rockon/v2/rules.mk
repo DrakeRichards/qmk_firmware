@@ -14,33 +14,33 @@ BOOTLOADER = atmel-dfu
 # Build Options
 #   change yes to no to disable
 #
-BOOTMAGIC_ENABLE = no       # Virtual DIP switch configuration
+#BOOTMAGIC_ENABLE = no       # Virtual DIP switch configuration
 EXTRAKEY_ENABLE = yes       # Audio control and System control
-CONSOLE_ENABLE = no        # Console for debug
-COMMAND_ENABLE = no        # Commands for debug and configuration
+#CONSOLE_ENABLE = no        # Console for debug
+#COMMAND_ENABLE = no        # Commands for debug and configuration
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
-SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
+#SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
 # if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
-NKRO_ENABLE = no            # USB Nkey Rollover
-BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
+#NKRO_ENABLE = no            # USB Nkey Rollover
+#BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 
 # Either do RGBLIGHT_ENABLE or RGB_MATRIX_ENABLE and RGB_MATRIX_DRIVER
-RGBLIGHT_ENABLE = no
-RGB_MATRIX_ENABLE = no
-RGB_MATRIX_DRIVER = WS2812
+#RGBLIGHT_ENABLE = no
+#RGB_MATRIX_ENABLE = no
+#RGB_MATRIX_DRIVER = ws2812
 
 # BEGIN PWM driver: uncomment if using STeMcell as it's a better led driver
 # WS2812_DRIVER = pwm
 # END PWM driver: uncomment if using STeMcell as it's a better led driver
 
-MIDI_ENABLE = no            # MIDI support
-UNICODE_ENABLE = no         # Unicode
-BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
-AUDIO_ENABLE = no           # Audio output on port C6
-FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
-ENCODER_ENABLE = no
-OLED_ENABLE = no
+#MIDI_ENABLE = no            # MIDI support
+#UNICODE_ENABLE = no         # Unicode
+#BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
+#AUDIO_ENABLE = no           # Audio output on port C6
+#FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
+#ENCODER_ENABLE = no
+#OLED_ENABLE = no
 # EXTRAFLAGS     += -flto     # macros disabled, if you need the extra space
 
-HAPTIC_ENABLE ?= no
-HAPTIC_DRIVER = DRV2605L
+#HAPTIC_ENABLE ?= no
+#HAPTIC_DRIVER = drv2605l

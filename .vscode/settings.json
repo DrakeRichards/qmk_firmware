@@ -18,7 +18,8 @@
         "xstddef": "c",
         "type_traits": "c",
         "utility": "c",
-        "ranges": "c"
+        "ranges": "c",
+        "*.jsonschema": "json"
     },
     "[markdown]": {
         "editor.trimAutoWhitespace": false,
@@ -30,5 +31,14 @@
     },
     "clangd.arguments": [
         "--header-insertion=never"
+    ],
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/keyboards/**/info.json",
+                "/keyboards/**/keyboard.json"
+            ],
+            "url": "./data/schemas/keyboard.jsonschema"
+        }
     ]
 }
