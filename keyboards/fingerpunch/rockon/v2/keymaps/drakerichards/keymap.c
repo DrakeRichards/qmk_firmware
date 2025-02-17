@@ -20,15 +20,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // See [this reply](https://github.com/qmk/qmk_firmware/issues/23968#issuecomment-2550321135).
 // Command: `bear -- qmk compile -kb fingerpunch/rockon/v2 -km drakerichards`
 // Run this any time you change config.h or rules.mk.
+
+// Compilation command: `qmk compile -kb fingerpunch/rockon/v2 -km drakerichards`
 #include QMK_KEYBOARD_H
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
     _CLM,
     _CLG,
-    _GAM,
     _LWR,
     _RSE,
+    _FUN,
+    _GAM,
     _ADJ,
     _MSE
 };
@@ -55,31 +58,25 @@ bool idle_enabled = false;
 // NOTE: For the encoder clicks, regardless of which location you put them (under palm or in the center), in the keymap, they are represented by the center two keycodes in the bottom row
 //                           KC_LCTL,   KC_LGUI,   LOWER,     KC_SPC,    KC_LALT, --->  KC_MUTE, LCTL(KC_BSPC), <--- KC_RALT,   KC_SPC,    RAISE,     KC_RGUI,   KC_RCTL
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
+// Colemak
 [_CLM] = LAYOUT(
 KC_GRV,     KC_EXLM,    KC_AT,      KC_HASH,    KC_DLR,     KC_PERC,    KC_F5,                                          KC_MPRV,    KC_CIRC,    KC_AMPR,    KC_ASTR,    KC_LPRN,    KC_RPRN,    KC_EQL,
-KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_G,       KC_INS,                                         KC_MNXT,    KC_J,       KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_MINS,
+KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_G,       KC_LGUI,                                        KC_MNXT,    KC_J,       KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_MINS,
 MC_RESC,    KC_A,       KC_R,       KC_S,       KC_T,       KC_D,       MC_OSMM,                                        KC_MPLY,    KC_H,       KC_N,       KC_E,       KC_I,       KC_O,       KC_QUOT,
 KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_LALT,                                        KC_DEL,     KC_K,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_BSLS,
-                        KC_NO,      KC_LGUI,    MC_LBSP,    KC_LSFT,    KC_LCTL,    KC_MUTE,                TG(_ADJ),   MO(_RSE),   KC_SPC,     KC_DEL,     TG(_CLG),   KC_NO
+                        KC_NO,      OSL(_FUN),  MC_LBSP,    KC_LSFT,    KC_LCTL,    KC_MUTE,                TG(_ADJ),   MO(_RSE),   KC_SPC,     KC_DEL,     TG(_CLG),   KC_NO
 ),
 
+// Colemak Gaming (No layer taps, combos, or mod taps)
 [_CLG] = LAYOUT(
-KC_GRV,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      TG(_LWR),                                       KC_MPRV,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_EQL,
-KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_G,       KC_INS,                                         KC_MNXT,    KC_J,       KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_MINS,
-KC_ESC,     KC_A,       KC_R,       KC_S,       KC_T,       KC_D,       MC_OSMM,                                        KC_MPLY,    KC_H,       KC_N,       KC_E,       KC_I,       KC_O,       KC_QUOT,
-KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_LALT,                                        KC_DEL,     KC_K,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_BSLS,
-                        KC_NO,      KC_DEL,     KC_BSPC,    KC_LSFT,    KC_LCTL,    _______,                _______,    MO(_RSE),   KC_SPC,     KC_DEL,     TO(_GAM),   KC_NO
+_______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       TG(_RSE),                                       _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
+_______,    _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+KC_ESC,     _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                        _______,    _______,    KC_BSPC,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    TO(_GAM),   _______
 ),
 
-[_GAM] = LAYOUT(
-KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_LCBR,                                        KC_RCBR,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_BSPC,
-KC_TAB,     KC_T,       KC_Q,       KC_W,       KC_E,       KC_R,       KC_LPRN,                                        KC_RPRN,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSLS,
-KC_ESC,     KC_G,       KC_A,       KC_S,       KC_D,       KC_F,       KC_LBRC,                                        KC_RBRC,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
-KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_BSPC,                                        ADJUST,     KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_ENT,
-                        KC_NO,      KC_LALT,    KC_LCTL,    KC_SPC,     KC_LSFT,    _______,                _______,    KC_RALT,    KC_SPC,     MO(_RSE),   TG(_GAM),   KC_NO
-),
-
+// Lower
 [_LWR] = LAYOUT(
 KC_GRV,     _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    KC_MINS,    KC_EQL,     _______,
 _______,    KC_MINS,    KC_7,       KC_8,       KC_9,       KC_LCBR,    _______,                                        _______,    KC_RCBR,    _______,    _______,    _______,    _______,    _______,
@@ -88,22 +85,44 @@ _______,    KC_DOT,     KC_1,       KC_2,       KC_3,       KC_LBRC,    _______,
                         _______,    KC_IDLE,    _______,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    _______,    _______
 ),
 
+// Raise
 [_RSE] = LAYOUT(
-_______,    _______,    _______,    KC_PGUP,    _______,    _______,    _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
+_______,    _______,    _______,    KC_PGUP,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    KC_HOME,    KC_UP,      KC_END,     _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    KC_LEFT,    KC_DOWN,    KC_RGHT,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    _______,    KC_PGDN,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
                         _______,    _______,    _______,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    _______,    _______
 ),
 
+// Function Keys
+[_FUN] = LAYOUT(
+_______,    _______,    KC_F10,     KC_F11,     KC_F12,     KC_F16,     _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    _______,    KC_F7,      KC_F8,      KC_F9,      KC_F15,     _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    _______,    KC_F4,      KC_F5,      KC_F6,      KC_F14,     _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    _______,    KC_F1,      KC_F2,      KC_F3,      KC_F13,     _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                        _______,    TG(_FUN),   _______,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    _______,    _______
+),
+
+// QWERTY Gaming (No layer taps, combos, or mod taps)
+// Columns are shifted to the right by one key to make the layout more comfortable for gaming.
+[_GAM] = LAYOUT(
+KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       TG(_RSE),                                       KC_RCBR,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_BSPC,
+KC_TAB,     KC_T,       KC_Q,       KC_W,       KC_E,       KC_R,       KC_LPRN,                                        KC_RPRN,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSLS,
+KC_ESC,     KC_G,       KC_A,       KC_S,       KC_D,       KC_F,       KC_LBRC,                                        KC_RBRC,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
+KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_BSPC,                                        ADJUST,     KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_ENT,
+                        KC_NO,      KC_LALT,    KC_LCTL,    KC_SPC,     KC_LSFT,    _______,                _______,    KC_RALT,    KC_SPC,     MO(_RSE),   TO(_CLM),   KC_NO
+),
+
+// Adjust
 [_ADJ] = LAYOUT(
-QK_BOOT,      KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,    _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______,
-_______,    UG_TOGG,    UG_PREV,    UG_NEXT,    _______,    TG(_GAM),   _______,                                        _______,    _______,    _______,    _______,    KC_F11,     KC_F12,     _______,
+QK_BOOT,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    UG_TOGG,    UG_PREV,    UG_NEXT,    _______,    TG(_GAM),   _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    UG_SPDU,    UG_HUEU,    UG_SATU,    UG_VALU,    TG(_CLM),   CG_TOGG,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    UG_SPDD,    UG_HUED,    UG_SATD,    UG_VALD,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
                         _______,    _______,    _______,    _______,    _______,    QK_BOOT,                _______,    _______,    _______,    _______,    _______,    _______
 ),
 
+// Mouse
 [_MSE] = LAYOUT(
 _______,    _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
 _______,    _______,    KC_WH_L,    KC_WH_U,    KC_WH_R,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
@@ -122,6 +141,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [4] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
     [5] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
     [6] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+    [7] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
 };
 #endif
 
@@ -205,6 +225,9 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
             case _ADJ:
                 oled_write_P(PSTR("Adjust\n"), false);
                 break;
+            case _FUN:
+                oled_write_P(PSTR("Function\n"), false);
+                break;
             case _MSE:
                 oled_write_P(PSTR("Mouse\n"), false);
                 break;
@@ -236,38 +259,57 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     }
 #endif
 
-// RGB Layer Lighting
-const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+/*
+[RGB Layer Lighting](https://docs.qmk.fm/features/rgblight#lighting-layers)
+
+LED Indexes (66 total):
+0   1   2   3   4   5   6   _   _   59  60  61  62  63  64  65
+13  12  11  10  9   8   7   _   _   58  57  56  55  54  53  52
+14  15  16  17  18  19  20  _   _   45  46  47  48  49  50  51
+27  26  25  24  23  22  21  _   _   44  43  42  41  40  39  38
+_   _   28e 29  30  31  32  _   _   33  34  35  36  37e _   _
+LEDs marked with "e" are optional encoder positions.
+
+If I ever decide to use [RGB Matrix](https://docs.qmk.fm/features/rgb_matrix) instead,
+the matrix can be found in [sadekbaroudi's QMK fork](https://github.com/sadekbaroudi/qmk_firmware/blob/master/keyboards/fingerpunch/rockon/v2/v2.c).
+
+The `RGBLIGHT_LAYER_SEGMENTS` macro takes a start index, length, and color (from HSV macros or in `,R,G,B` format).
+*/
+const rgblight_segment_t PROGMEM lighting_colemak[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 65, HSV_RED}
 );
-const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+const rgblight_segment_t PROGMEM lighting_colemak_gaming[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 65, HSV_ORANGE}
 );
-const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+const rgblight_segment_t PROGMEM lighting_lower[] = RGBLIGHT_LAYER_SEGMENTS(
     // Violet
     {0, 65, 213, 255, 64}
 );
-const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+const rgblight_segment_t PROGMEM lighting_raise[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 65, HSV_BLUE}
 );
-const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+const rgblight_segment_t PROGMEM lighting_function[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 65, HSV_PURPLE}
 );
-const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+const rgblight_segment_t PROGMEM lighting_qwerty_gaming[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 65, HSV_PURPLE}
 );
-const rgblight_segment_t PROGMEM my_layer6_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+const rgblight_segment_t PROGMEM lighting_adjust[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 65, HSV_PURPLE}
+);
+const rgblight_segment_t PROGMEM lighting_mouse[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 65, HSV_PURPLE}
 );
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    my_layer0_layer,
-    my_layer1_layer,
-    my_layer2_layer,
-    my_layer3_layer,
-    my_layer4_layer,
-    my_layer5_layer,
-    my_layer6_layer
+    lighting_colemak,
+    lighting_colemak_gaming,
+    lighting_lower,
+    lighting_raise,
+    lighting_function,
+    lighting_qwerty_gaming,
+    lighting_adjust,
+    lighting_mouse
 );
 
 void keyboard_post_init_user(void) {
@@ -276,17 +318,19 @@ void keyboard_post_init_user(void) {
 }
 
 layer_state_t default_layer_state_set_user(layer_state_t state) {
-    rgblight_set_layer_state(0, layer_state_cmp(state, _CLM));
+    rgblight_set_layer_state(_CLM, layer_state_cmp(state, _CLM));
     return state;
 }
 
+// These are applied IN ORDER, so the last one will take precedence
 layer_state_t layer_state_set_user(layer_state_t state) {
-    rgblight_set_layer_state(1, layer_state_cmp(state, _CLG));
-    rgblight_set_layer_state(2, layer_state_cmp(state, _GAM));
-    rgblight_set_layer_state(3, layer_state_cmp(state, _LWR));
-    rgblight_set_layer_state(4, layer_state_cmp(state, _RSE));
-    rgblight_set_layer_state(5, layer_state_cmp(state, _ADJ));
-    rgblight_set_layer_state(6, layer_state_cmp(state, _MSE));
+    rgblight_set_layer_state(_CLG, layer_state_cmp(state, _CLG));
+    rgblight_set_layer_state(_LWR, layer_state_cmp(state, _LWR));
+    rgblight_set_layer_state(_RSE, layer_state_cmp(state, _RSE));
+    rgblight_set_layer_state(_FUN, layer_state_cmp(state, _FUN));
+    rgblight_set_layer_state(_GAM, layer_state_cmp(state, _GAM));
+    rgblight_set_layer_state(_ADJ, layer_state_cmp(state, _ADJ));
+    rgblight_set_layer_state(_MSE, layer_state_cmp(state, _MSE));
     return state;
 }
 
@@ -320,8 +364,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-
-// To format the keymap, run `cat ./keyboards/fingerpunch/rockon/v2/keymaps/drakerichards/keymap.c | ./go-qmk-keymap > ./keyboards/fingerpunch/rockon/v2/keymaps/drakerichards/keymap.c`
+// Keymap formatting using [qmk-keyboard-format](https://github.com/jurgen-kluft/go-qmk-keymap)
+// To format the keymap, run `cat ./keyboards/fingerpunch/rockon/v2/keymaps/drakerichards/keymap.c | ./go-qmk-keymap > ./keymap.c`
+// The formatted file can then be moved back to the original location with `mv -f ./keymap.c ./keyboards/fingerpunch/rockon/v2/keymaps/drakerichards/keymap.c`
 
 /*
 qmk-keyboard-format:json:begin
@@ -347,6 +392,7 @@ qmk-keyboard-format:json:begin
         { "line": "[_RSC] = LAYOUT_(", "layer": "_RSC" },
         { "line": "[_LWR] = LAYOUT_(", "layer": "_LWR" },
         { "line": "[_RSE] = LAYOUT_(", "layer": "_RSE" },
+        { "line": "[_FUN] = LAYOUT_(", "layer": "_FUN" },
         { "line": "[_ADJ] = LAYOUT_(", "layer": "_ADJ" }
     ],
     "vizline": "//#",
