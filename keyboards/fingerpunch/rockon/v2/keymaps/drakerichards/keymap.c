@@ -27,7 +27,6 @@ enum layer_names {
     _CLM,
     _CLG,
     _GAM,
-    _RSC,
     _LWR,
     _RSE,
     _ADJ,
@@ -62,15 +61,15 @@ KC_GRV,     KC_EXLM,    KC_AT,      KC_HASH,    KC_DLR,     KC_PERC,    KC_F5,  
 KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_G,       KC_INS,                                         KC_MNXT,    KC_J,       KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_MINS,
 MC_RESC,    KC_A,       KC_R,       KC_S,       KC_T,       KC_D,       MC_OSMM,                                        KC_MPLY,    KC_H,       KC_N,       KC_E,       KC_I,       KC_O,       KC_QUOT,
 KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_LALT,                                        KC_DEL,     KC_K,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_BSLS,
-                        KC_NO,      KC_LGUI,    MC_LBSP,    KC_LSFT,    KC_LCTL,    KC_MUTE,                TG(_ADJ),   MO(_RSE),   KC_SPC,     KC_DEL,     TO(_CLG),   KC_NO
+                        KC_NO,      KC_LGUI,    MC_LBSP,    KC_LSFT,    KC_LCTL,    KC_MUTE,                TG(_ADJ),   MO(_RSE),   KC_SPC,     KC_DEL,     TG(_CLG),   KC_NO
 ),
 
 [_CLG] = LAYOUT(
-KC_GRV,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      TG(_LWR),                                          KC_MPRV,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_EQL,
+KC_GRV,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      TG(_LWR),                                       KC_MPRV,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_EQL,
 KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_G,       KC_INS,                                         KC_MNXT,    KC_J,       KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_MINS,
 KC_ESC,     KC_A,       KC_R,       KC_S,       KC_T,       KC_D,       MC_OSMM,                                        KC_MPLY,    KC_H,       KC_N,       KC_E,       KC_I,       KC_O,       KC_QUOT,
 KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_LALT,                                        KC_DEL,     KC_K,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_BSLS,
-                        KC_NO,      KC_DEL,     KC_BSPC,    KC_LSFT,    KC_LCTL,    KC_MUTE,                TG(_ADJ),   MO(_RSE),   KC_SPC,     KC_DEL,     TO(_GAM),   KC_NO
+                        KC_NO,      KC_DEL,     KC_BSPC,    KC_LSFT,    KC_LCTL,    _______,                _______,    MO(_RSE),   KC_SPC,     KC_DEL,     TO(_GAM),   KC_NO
 ),
 
 [_GAM] = LAYOUT(
@@ -78,7 +77,7 @@ KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_LCBR,
 KC_TAB,     KC_T,       KC_Q,       KC_W,       KC_E,       KC_R,       KC_LPRN,                                        KC_RPRN,    KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSLS,
 KC_ESC,     KC_G,       KC_A,       KC_S,       KC_D,       KC_F,       KC_LBRC,                                        KC_RBRC,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
 KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_BSPC,                                        ADJUST,     KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_ENT,
-                        KC_NO,      KC_LALT,    KC_LCTL,    KC_SPC,     KC_LSFT,    _______,                _______,    KC_RALT,    KC_SPC,     MO(_RSE),   TO(_CLM),   KC_NO
+                        KC_NO,      KC_LALT,    KC_LCTL,    KC_SPC,     KC_LSFT,    _______,                _______,    KC_RALT,    KC_SPC,     MO(_RSE),   TG(_GAM),   KC_NO
 ),
 
 [_LWR] = LAYOUT(
@@ -98,10 +97,10 @@ _______,    _______,    _______,    KC_PGDN,    _______,    _______,    _______,
 ),
 
 [_ADJ] = LAYOUT(
-QK_BOOT,      KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______,
-_______,    RGB_TOG,    RGB_RMOD,   RGB_MOD,    _______,    TG(_GAM),   _______,                                        _______,    _______,    _______,    _______,    KC_F11,     KC_F12,     _______,
-_______,    RGB_SPI,    RGB_HUI,    RGB_SAI,    RGB_VAI,    TG(_CLM),   CG_TOGG,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
-_______,    RGB_SPD,    RGB_HUD,    RGB_SAD,    RGB_VAD,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+QK_BOOT,      KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,    _______,                                        _______,    KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______,
+_______,    UG_TOGG,    UG_PREV,    UG_NEXT,    _______,    TG(_GAM),   _______,                                        _______,    _______,    _______,    _______,    KC_F11,     KC_F12,     _______,
+_______,    UG_SPDU,    UG_HUEU,    UG_SATU,    UG_VALU,    TG(_CLM),   CG_TOGG,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    UG_SPDD,    UG_HUED,    UG_SATD,    UG_VALD,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
                         _______,    _______,    _______,    _______,    _______,    QK_BOOT,                _______,    _______,    _______,    _______,    _______,    _______
 ),
 
@@ -123,7 +122,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [4] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
     [5] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
     [6] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
-    [7] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
 };
 #endif
 
@@ -190,7 +188,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
         // Host Keyboard Layer Status
         switch (get_highest_layer(layer_state|default_layer_state)) {
             case _GAM:
-                oled_write_P(PSTR("Gaming\n"), false);
+                oled_write_P(PSTR("Gaming (QWERTY)\n"), false);
                 break;
             case _CLG:
                 oled_write_P(PSTR("Gaming (Colemak)\n"), false);
@@ -229,42 +227,67 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 #endif
 
-#ifdef RGBLIGHT_ENABLE
-    const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 65, HSV_RED}
-    );
-    const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 65, HSV_ORANGE}
-    );
-    const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 65, 213, 255, 64}
-    );
-    const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 65, HSV_BLUE}
-    );
-    const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 65, HSV_PURPLE}
-    );
-
-    const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-        my_layer0_layer,
-        my_layer1_layer,
-        my_layer2_layer,
-        my_layer3_layer,
-        my_layer4_layer
-    );
-#endif
-
 #ifdef POINTING_DEVICE_ENABLE
     void pointing_device_init_user(void) {
-        set_auto_mouse_layer(_MSE); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
-        set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
+        // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
+        set_auto_mouse_layer(_MSE);
+        // always required before the auto mouse feature will work
+        set_auto_mouse_enable(true);
     }
 #endif
+
+// RGB Layer Lighting
+const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 65, HSV_RED}
+);
+const rgblight_segment_t PROGMEM my_layer1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 65, HSV_ORANGE}
+);
+const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    // Violet
+    {0, 65, 213, 255, 64}
+);
+const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 65, HSV_BLUE}
+);
+const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 65, HSV_PURPLE}
+);
+const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 65, HSV_PURPLE}
+);
+const rgblight_segment_t PROGMEM my_layer6_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 65, HSV_PURPLE}
+);
+
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    my_layer0_layer,
+    my_layer1_layer,
+    my_layer2_layer,
+    my_layer3_layer,
+    my_layer4_layer,
+    my_layer5_layer,
+    my_layer6_layer
+);
 
 void keyboard_post_init_user(void) {
     is_caps_lock_on = false;
     rgblight_layers = my_rgb_layers;
+}
+
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(0, layer_state_cmp(state, _CLM));
+    return state;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(1, layer_state_cmp(state, _CLG));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _GAM));
+    rgblight_set_layer_state(3, layer_state_cmp(state, _LWR));
+    rgblight_set_layer_state(4, layer_state_cmp(state, _RSE));
+    rgblight_set_layer_state(5, layer_state_cmp(state, _ADJ));
+    rgblight_set_layer_state(6, layer_state_cmp(state, _MSE));
+    return state;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -278,40 +301,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             break;
-        case LOWER:
-            if (record->event.pressed) {
-                layer_on(_LWR);
-                update_tri_layer(_LWR, _RSE, _ADJ);
-            } else {
-                layer_off(_LWR);
-                update_tri_layer(_LWR, _RSE, _ADJ);
-            }
-            return false;
-            break;
-        case RAISE:
-            if (record->event.pressed) {
-                layer_on(_RSE);
-                update_tri_layer(_LWR, _RSE, _ADJ);
-            } else {
-                layer_off(_RSE);
-                update_tri_layer(_LWR, _RSE, _ADJ);
-            }
-            return false;
-            break;
-        case ADJUST:
-            if (record->event.pressed) {
-                layer_on(_ADJ);
-            } else {
-                layer_off(_ADJ);
-            }
-            return false;
-            break;
+        // Toggle the idle macro
         case KC_IDLE:
             if (record->event.pressed) {
                 if (idle_enabled) { oled_clear(); }
                 idle_enabled = !idle_enabled;
             };
             break;
+        // Switch Ctrl/GUI for Mac
         case CG_TOGG:
             if (record->event.pressed) {
                 cg_toggle_enabled = !cg_toggle_enabled;
@@ -323,18 +320,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-layer_state_t default_layer_state_set_user(layer_state_t state) {
-    rgblight_set_layer_state(0, layer_state_cmp(state, _CLM));
-    return state;
-}
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-    rgblight_set_layer_state(1, layer_state_cmp(state, _LWR));
-    rgblight_set_layer_state(2, layer_state_cmp(state, _RSE));
-    rgblight_set_layer_state(3, layer_state_cmp(state, _ADJ));
-    rgblight_set_layer_state(4, layer_state_cmp(state, _MSE));
-    return state;
-}
+// To format the keymap, run `cat ./keyboards/fingerpunch/rockon/v2/keymaps/drakerichards/keymap.c | ./go-qmk-keymap > ./keyboards/fingerpunch/rockon/v2/keymaps/drakerichards/keymap.c`
 
 /*
 qmk-keyboard-format:json:begin
