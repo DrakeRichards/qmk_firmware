@@ -263,6 +263,14 @@ const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 
 // Userspace functions
 bool cg_toggle_enabled = false;
+uint32_t idle_time = 3000;
+
+static uint32_t idle_timer_callback(uint32_t trigger_time, void *cb_arg) {
+    if (idle_enabled) {
+        tap_code16(KC_F15);
+    }
+    return idle_time;
+}
 
 void keyboard_post_init_user(void) {
     rgblight_layers = my_rgb_layers;
@@ -273,6 +281,12 @@ void keyboard_post_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    static deferred_token idle_token = INVALID_DEFERRED_TOKEN;
+
+    if (!extend_deferred_exec(idle_token, idle_time) && idle_enabled) {
+        idle_token = defer_exec(idle_time, idle_timer_callback, NULL);
+    }
+
     switch (keycode) {
         // Toggle the idle macro
         case KC_IDLE:
