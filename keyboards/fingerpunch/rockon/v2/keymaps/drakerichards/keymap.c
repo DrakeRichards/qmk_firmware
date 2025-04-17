@@ -44,7 +44,7 @@ static const layer_display my_layers[] = {
     {
         .display_name = "Colemak",
         .layer_number = _CLM,
-        .left_text = {"F5", "GUI", "MEH"},
+        .left_text = {"F5", "FNC", "MEH"},
         .right_text = {"MPRV", "MNXT", "MPLY"},
         .layer_colors = RGBLIGHT_LAYER_SEGMENTS(
             {0, 65, HSV_RED}
@@ -53,7 +53,7 @@ static const layer_display my_layers[] = {
     {
         .display_name = "Colemak Gaming",
         .layer_number = _CLG,
-        .left_text = {"RSE", "GUI", "MEH"},
+        .left_text = {"RSE", "FNC", "MEH"},
         .right_text = {"MPRV", "MNXT", "MPLY"},
         .layer_colors = RGBLIGHT_LAYER_SEGMENTS(
             {0, 65, HSV_ORANGE}
@@ -62,7 +62,7 @@ static const layer_display my_layers[] = {
     {
         .display_name = "Lower",
         .layer_number = _LWR,
-        .left_text = {"F5", "GUI", "WLFT"},
+        .left_text = {"F5", "FNC", "WLFT"},
         .right_text = {"MPRV", "MNXT", "WRT"},
         .layer_colors = RGBLIGHT_LAYER_SEGMENTS(
             {0, 65, 213, 255, 64}
@@ -71,7 +71,7 @@ static const layer_display my_layers[] = {
     {
         .display_name = "Raise",
         .layer_number = _RSE,
-        .left_text = {"F5", "GUI", "MEH"},
+        .left_text = {"F5", "FNC", "MEH"},
         .right_text = {"MPRV", "MNXT", "MPLY"},
         .layer_colors = RGBLIGHT_LAYER_SEGMENTS(
             {0, 65, HSV_BLUE}
@@ -80,7 +80,7 @@ static const layer_display my_layers[] = {
     {
         .display_name = "Function Keys",
         .layer_number = _FUN,
-        .left_text = {"F5", "GUI", "MEH"},
+        .left_text = {"F5", "FNC", "MEH"},
         .right_text = {"MPRV", "MNXT", "MPLY"},
         .layer_colors = RGBLIGHT_LAYER_SEGMENTS(
             {0, 65, HSV_PURPLE}
@@ -139,10 +139,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Colemak
 [_CLM] = LAYOUT(
 KC_GRV,     KC_EXLM,    KC_AT,      KC_HASH,    KC_DLR,     KC_PERC,    KC_F5,                                          KC_MPRV,    KC_CIRC,    KC_AMPR,    KC_ASTR,    KC_LPRN,    KC_RPRN,    KC_EQL,
-KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_G,       KC_LGUI,                                        KC_MNXT,    KC_J,       KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_MINS,
+KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_G,       OSL(_FUN),                                      KC_MNXT,    KC_J,       KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_MINS,
 MC_RESC,    KC_A,       KC_R,       KC_S,       KC_T,       KC_D,       MC_OSMM,                                        KC_MPLY,    KC_H,       KC_N,       KC_E,       KC_I,       KC_O,       KC_QUOT,
 KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_LALT,                                        KC_DEL,     KC_K,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_BSLS,
-                        KC_NO,      OSL(_FUN),  MC_LBSP,    KC_LSFT,    KC_LCTL,    KC_MUTE,                TG(_ADJ),   MO(_RSE),   KC_SPC,     KC_DEL,     TG(_CLG),   KC_NO
+                        KC_NO,      KC_LGUI,    MC_LBSP,    KC_LSFT,    KC_LCTL,    KC_MUTE,                TG(_ADJ),   MO(_RSE),   KC_SPC,     KC_DEL,     TG(_CLG),   KC_NO
 ),
 
 // Colemak Gaming (No layer taps, combos, or mod taps)
@@ -175,10 +175,10 @@ _______,    _______,    _______,    KC_PGDN,    _______,    _______,    _______,
 // Function Keys
 [_FUN] = LAYOUT(
 _______,    _______,    KC_F10,     KC_F11,     KC_F12,     KC_F16,     _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
-_______,    _______,    KC_F7,      KC_F8,      KC_F9,      KC_F15,     _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    _______,    KC_F7,      KC_F8,      KC_F9,      KC_F15,     TG(_FUN),                                       _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    KC_F4,      KC_F5,      KC_F6,      KC_F14,     _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    KC_F1,      KC_F2,      KC_F3,      KC_F13,     _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
-                        _______,    TG(_FUN),   _______,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    _______,    _______
+                        _______,    _______,    _______,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    _______,    _______
 ),
 
 // QWERTY Gaming (No layer taps, combos, or mod taps)
