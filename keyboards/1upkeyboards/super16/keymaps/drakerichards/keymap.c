@@ -20,7 +20,8 @@ enum LAYER_NAMES {
     NUMS,
     NUMF,
     RUNE,
-    TEXS
+    TEXS,
+    MINE
 };
 
 enum CUSTOM_KEYCODES {
@@ -84,7 +85,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         DCLICK,       KC_MS_BTN1,       KC_MS_BTN1,       KC_MS_BTN1,
         DCLICK,      KC_MS_BTN1,      KC_MS_BTN1,      KC_MS_BTN1,
         DCLICK,      DCLICK,      DCLICK,      DCLICK,
-        IDLE,     TO(NUMP),   DCLICK,     DCLICK
+        IDLE,     TO(MINE),   DCLICK,     DCLICK
+    ),
+
+    [MINE] = LAYOUT_ortho_4x4( /* Minecraft Controls */
+        KC_1,    KC_2,    KC_3,    KC_4,
+        KC_Q,    KC_W,    KC_F,    KC_P,
+        KC_A,    KC_R,    KC_S,    KC_T,
+        KC_LCTL, TO(NUMP),KC_BSPC, KC_LSFT
     )
 };
 
@@ -136,6 +144,13 @@ void matrix_scan_user(void) {
 
 void led_set_user(uint8_t usb_led) {}
 
+// LED Arrangement:
+// 0  1  2  3
+// 7  6  5  4
+// 8  9  10 11
+// 15 14 13 12
+
+// Green center with a blue left edge and red on the layer switch key
 const rgblight_segment_t PROGMEM my_numlayers_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 1, HSV_BLUE},
     {1, 6, HSV_GREEN},
@@ -146,6 +161,7 @@ const rgblight_segment_t PROGMEM my_numlayers_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {15, 1, HSV_BLUE}
 );
 
+// Purple center with a teal left edge and red on the layer switch key
 const rgblight_segment_t PROGMEM my_fnum_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 1, HSV_PURPLE},
     {1, 6, HSV_TEAL},
@@ -156,6 +172,7 @@ const rgblight_segment_t PROGMEM my_fnum_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {15, 1, HSV_PURPLE}
 );
 
+// Gold center with a cyan left edge and red on the layer switch key
 const rgblight_segment_t PROGMEM my_numnum_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 1, HSV_GOLD},
     {1, 6, HSV_CYAN},
@@ -166,6 +183,7 @@ const rgblight_segment_t PROGMEM my_numnum_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {15, 1, HSV_GOLD}
 );
 
+// Top row turquoise, next two rows blue, last row yellow, gold, red, purple
 const rgblight_segment_t PROGMEM my_runelayer_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 4, HSV_TURQUOISE},
     {4, 8, HSV_BLUE},
@@ -175,6 +193,7 @@ const rgblight_segment_t PROGMEM my_runelayer_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {15, 1, HSV_PURPLE}
 );
 
+// Texas flag colors
 const rgblight_segment_t PROGMEM texas_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 1, HSV_BLUE},
     {1, 6, HSV_WHITE},
@@ -183,12 +202,24 @@ const rgblight_segment_t PROGMEM texas_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {15, 1, HSV_CYAN}
 );
 
+// Pink under the FRST keys and the shift key. Everything else is off.
+// Should help with finding the FRST keys in the dark.
+const rgblight_segment_t PROGMEM pink_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 6, HSV_OFF},
+    {5, 1, HSV_PINK},
+    {6, 3, HSV_OFF},
+    {9, 3, HSV_PINK},
+    {12, 1, HSV_PURPLE},
+    {13, 3, HSV_OFF}
+);
+
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     my_numlayers_layer,
     my_fnum_layer,
     my_numnum_layer,
     my_runelayer_layer,
-    texas_layer
+    texas_layer,
+    pink_layer
 );
 
 void keyboard_post_init_user(void) {
@@ -205,5 +236,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(2, layer_state_cmp(state, NUMF));
     rgblight_set_layer_state(3, layer_state_cmp(state, RUNE));
     rgblight_set_layer_state(4, layer_state_cmp(state, TEXS));
+    rgblight_set_layer_state(5, layer_state_cmp(state, MINE));
     return state;
 }

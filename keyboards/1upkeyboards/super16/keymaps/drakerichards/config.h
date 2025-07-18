@@ -18,5 +18,9 @@
 
 #define RGBLIGHT_LAYERS
 #define COMBO_COUNT 4
+#ifdef TAPPING_TERM
+#    undef TAPPING_TERM
+#endif
+#define TAPPING_TERM 125
 
 // place overrides here
