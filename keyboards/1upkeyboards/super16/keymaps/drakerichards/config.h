@@ -18,6 +18,5 @@
 
 #define RGBLIGHT_LAYERS
 #define COMBO_COUNT 4
-#define TAPPING_TERM 125
 
 // place overrides here
