@@ -206,11 +206,13 @@ const rgblight_segment_t PROGMEM texas_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 // Should help with finding the FRST keys in the dark.
 const rgblight_segment_t PROGMEM pink_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 6, HSV_OFF},
-    {5, 1, HSV_PINK},
-    {6, 3, HSV_OFF},
-    {9, 3, HSV_PINK},
-    {12, 1, HSV_PURPLE},
-    {13, 3, HSV_OFF}
+    {5, 1, HSV_HPINK},
+    {6, 2, HSV_OFF},
+    {8, 1, HSV_RED},
+    {9, 3, HSV_HPINK},
+    {12, 1, HSV_BLUE},
+    {13, 1, HSV_GREEN},
+    {14, 2, HSV_OFF}
 );
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(

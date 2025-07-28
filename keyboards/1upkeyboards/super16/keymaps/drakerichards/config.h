@@ -22,5 +22,6 @@
 #    undef TAPPING_TERM
 #endif
 #define TAPPING_TERM 125
+#define HSV_HPINK 205,255,255
 
 // place overrides here
