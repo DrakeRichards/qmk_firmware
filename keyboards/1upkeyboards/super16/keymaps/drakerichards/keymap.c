@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_1,    KC_2,    KC_3,    KC_4,
         KC_Q,    KC_W,    KC_F,    KC_P,
         KC_A,    KC_R,    KC_S,    KC_T,
-        KC_LCTL, TO(NUMP),KC_BSPC, KC_LSFT
+        KC_ESC, TO(NUMP),KC_BSPC, KC_LSFT
     )
 };
 
@@ -205,14 +205,16 @@ const rgblight_segment_t PROGMEM texas_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 // Pink under the FRST keys and the shift key. Everything else is off.
 // Should help with finding the FRST keys in the dark.
 const rgblight_segment_t PROGMEM pink_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 6, HSV_OFF},
+    {0, 5, HSV_OFF},
+    {4, 1, HSV_GOLD},
     {5, 1, HSV_HPINK},
     {6, 2, HSV_OFF},
-    {8, 1, HSV_RED},
+    {8, 1, HSV_OFF},
     {9, 3, HSV_HPINK},
     {12, 1, HSV_BLUE},
     {13, 1, HSV_GREEN},
-    {14, 2, HSV_OFF}
+    {14, 1, HSV_OFF},
+    {15, 1, HSV_RED}
 );
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
