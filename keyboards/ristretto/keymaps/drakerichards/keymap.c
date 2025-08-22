@@ -14,6 +14,14 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
 
+// QMK_KEYBOARD_H doesn't play well with clangd. See [#23968](https://github.com/qmk/qmk_firmware/issues/23968).
+// Solution is to use `bear` to generate the compilation database.
+// See [this reply](https://github.com/qmk/qmk_firmware/issues/23968#issuecomment-2550321135).
+// Command: `bear -- qmk compile -kb ristretto -km drakerichards`
+// Run this any time you change config.h or rules.mk.
+
+// Compilation command: `qmk compile -kb ristretto -km drakerichards`
+
 #include QMK_KEYBOARD_H
 #include "oled.c"
 
@@ -52,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	),
 	[_RAISE] = LAYOUT(
 		KC_TRNS	, KC_PGUP	  , KC_HOME    , KC_UP    , KC_END	, KC_NO              , KC_NO    , KC_7    , KC_8    , KC_9    , KC_NO    , KC_NO  ,
-		KC_TRNS	, KC_PGDN , KC_LEFT  , KC_DOWN , KC_RIGHT , KC_NO           , KC_NO   , KC_4 , KC_5 , KC_6   , KC_0 , KC_NO ,
+		KC_TRNS	, KC_PGDN , KC_LEFT  , KC_DOWN , KC_RIGHT , KC_NO           , KC_LEFT   , KC_DOWN , KC_UP , KC_RIGHT   , KC_0 , KC_NO ,
 		KC_TRNS	, KC_NO	  , KC_NO   , KC_NO   , KC_NO   , KC_NO             , KC_NO   , KC_1   , KC_2   , KC_3   , KC_NO   , KC_NO   ,
 		KC_TRNS , KC_TRNS , KC_TRNS ,KC_NO,KC_NO , KC_RSFT   , TG(_QWER) , KC_MPLY   , KC_TRNS , LGUI(LCTL(KC_LEFT))   , DT_DOWN , DT_UP , LGUI(LCTL(KC_RIGHT))
 	),
