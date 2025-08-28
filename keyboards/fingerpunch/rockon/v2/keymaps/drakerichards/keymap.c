@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum layer_names {
     _CLM,
     _CLG,
+    _RUN,
     _LWR,
     _RSE,
     _FUN,
@@ -57,6 +58,15 @@ static const layer_display my_layers[] = {
         .right_text = {"MPRV", "MNXT", "MPLY"},
         .layer_colors = RGBLIGHT_LAYER_SEGMENTS(
             {0, 65, HSV_ORANGE}
+        )
+    },
+    {
+        .display_name = "RuneScape",
+        .layer_number = _RUN,
+        .left_text = {"RSE", "FNC", "MEH"},
+        .right_text = {"MPRV", "MNXT", "MPLY"},
+        .layer_colors = RGBLIGHT_LAYER_SEGMENTS(
+            {0, 65, HSV_CHARTREUSE}
         )
     },
     {
@@ -112,7 +122,7 @@ static const layer_display my_layers[] = {
         .layer_colors = RGBLIGHT_LAYER_SEGMENTS(
             {0, 65, HSV_PURPLE}
         )
-    }
+    },
 };
 
 enum custom_keycodes {
@@ -150,6 +160,15 @@ KC_ENT,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_LALT,
 _______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       TG(_RSE),                                       _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
 _______,    _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 KC_ESC,     _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+_______,    _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+                        _______,    _______,    KC_BSPC,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    TO(_RUN),   _______
+),
+
+// RuneScape
+[_RUN] = LAYOUT(
+_______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       TG(_RSE),                                       _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
+_______,    KC_F5,      KC_F6,      KC_F7,      KC_F8,      _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
+KC_ESC,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    _______,    _______,    _______,    _______,    _______,                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,
                         _______,    _______,    KC_BSPC,    _______,    _______,    _______,                _______,    _______,    _______,    _______,    TO(_GAM),   _______
 ),
@@ -221,6 +240,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [5] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
     [6] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
     [7] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+    [8] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
 };
 #endif
 
@@ -258,7 +278,8 @@ const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     my_layers[4].layer_colors,
     my_layers[5].layer_colors,
     my_layers[6].layer_colors,
-    my_layers[7].layer_colors
+    my_layers[7].layer_colors,
+    my_layers[8].layer_colors
 );
 
 // Userspace functions
@@ -336,6 +357,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(_GAM, layer_state_cmp(state, _GAM));
     rgblight_set_layer_state(_ADJ, layer_state_cmp(state, _ADJ));
     rgblight_set_layer_state(_MSE, layer_state_cmp(state, _MSE));
+    rgblight_set_layer_state(_RUN, layer_state_cmp(state, _RUN));
 
     // Display the current layer on the OLED screen
     if (my_font != NULL) {
@@ -371,6 +393,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
                 break;
             case _MSE:
                 layer_display_draw(&my_layers[_MSE], display, my_font);
+                break;
+            case _RUN:
+                layer_display_draw(&my_layers[_RUN], display, my_font);
                 break;
             default:
                 break;
